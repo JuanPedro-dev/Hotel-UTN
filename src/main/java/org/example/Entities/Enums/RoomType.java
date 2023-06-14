@@ -1,4 +1,4 @@
-package org.example.entities;
+package org.example.Entities.Enums;
 
 public enum RoomType {
     SINGLE ("Single", 20),

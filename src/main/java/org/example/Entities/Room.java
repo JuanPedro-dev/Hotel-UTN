@@ -1,11 +1,15 @@
-package org.example.entities;
+package org.example.Entities;
+
+import org.example.Entities.Enums.BookingState;
+import org.example.Entities.Enums.Product;
+import org.example.Entities.Enums.RoomType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class Hotel {
+public class Room {
     private ArrayList<Room> roomList;
     private HashSet<Booking> bookingList;
     private ArrayList<Passenger> passengerList;
@@ -278,7 +282,7 @@ public class Hotel {
     {
         //ArrayList<Room> uploadedRooms = new ArrayList<>();
 
-        Room newRoom = new Room(true,101,RoomType.TRIPLE);
+        Room newRoom = new Room(true,101, RoomType.TRIPLE);
         Room newRoom2 = new Room(true,102,RoomType.MATRIMONIAL);
         Room newRoom3 = new Room(true,103,RoomType.QUAD);
         Room newRoom4 = new Room(true,104,RoomType.SINGLE);
@@ -400,5 +404,4 @@ public class Hotel {
     {
         return adminList.add(newAdmin);
     }
-
 }
