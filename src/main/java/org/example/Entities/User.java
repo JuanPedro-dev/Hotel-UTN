@@ -13,7 +13,7 @@ public abstract class  User {
     private String user;
     private String password;
     private String email;
-    private long phoneNumber; 
+    private long phoneNumber;
     //endregion
 
     //region Constructors
