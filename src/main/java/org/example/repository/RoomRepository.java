@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoomRepository implements IRepository{
+public class RoomRepository implements IRepository<Room, Integer>{
 
     private final File file = new File("src/main/java/org/example/file/RoomFile.json");
     private final SerializerGson gson = new SerializerGson<>();
@@ -31,7 +31,7 @@ public class RoomRepository implements IRepository{
 
     @Override
     public void add(Room obj) {
-        Room toAdd = getById(obj.getDni());
+        Room toAdd = getById(obj.getRoomNumber());
 
         if (toAdd == null) {
             this.rooms.add(obj);
@@ -47,10 +47,10 @@ public class RoomRepository implements IRepository{
     }
 
     @Override
-    public Room getById(Integer dni) {
+    public Room getById(Integer id) {
 
         for (Room room : this.rooms) {
-            if (room.getDni().equals(dni)) return room;
+            if (room.getRoomNumber() == id) return room;
         }
 
         return null;
@@ -59,13 +59,13 @@ public class RoomRepository implements IRepository{
     @Override
     public void update(Room obj) {
 
-        Room toUpdate = getById(obj.getDni());
+        Room toUpdate = getById(obj.getRoomNumber());
 
         if (toUpdate == null) {
             throw new RoomExceptions("La habitación no Existe!");
         } else {
             for (Room room : this.rooms) {
-                if (room.getDni().equals(obj.getDni())) {
+                if (room.getRoomNumber() == obj.getRoomNumber()) {
                     int index = rooms.indexOf(room);
                     rooms.set(index, obj);
                 }
@@ -76,7 +76,7 @@ public class RoomRepository implements IRepository{
 
     @Override
     public void delete(Integer dni) {
-        this.rooms.removeIf(room -> room.getDni().equals(dni));
+        this.rooms.removeIf(room -> room.getRoomNumber() == dni);
     }
 
 }
