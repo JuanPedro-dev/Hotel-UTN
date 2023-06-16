@@ -1,8 +1,8 @@
-package org.example.Entities;
+package org.example.entity;
 
-import org.example.Entities.Enums.BookingState;
-import org.example.Entities.Enums.Product;
-import org.example.Entities.Enums.RoomType;
+import org.example.entity.enums.BookingState;
+import org.example.entity.enums.Product;
+import org.example.entity.enums.RoomType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
 public class Hotel {
     private ArrayList<Room> roomList;
     private HashSet<Booking> bookingList;
-    private ArrayList<Passenger> passengerList;
+    private ArrayList<Guest> passengerList;
     private ArrayList<Admin> adminList;
     private ArrayList<Employee> employeeList;
 
@@ -80,7 +80,7 @@ public class Hotel {
         return false;
     }
 
-    public Booking makeBooking(LocalDate checkIn, LocalDate checkOut, Passenger bookingPassenger, int roomNumber)
+    public Booking makeBooking(LocalDate checkIn, LocalDate checkOut, Guest bookingPassenger, int roomNumber)
     {
         Room roomBoked;
 
@@ -201,16 +201,16 @@ public class Hotel {
         return null;
     }
 
-    /*******************************Passenger**********************************/
-    public boolean addPassenger(Passenger newPassenger)
+    /*******************************Guest**********************************/
+    public boolean addPassenger(Guest newPassenger)
     {
         return passengerList.add(newPassenger);
     }
 
-    public Passenger getPassengerbyDni(String dni)
+    public Guest getPassengerbyDni(String dni)
     {
         if (passengerList != null) {
-            for (Passenger user : passengerList) {
+            for (Guest user : passengerList) {
                 if (user.getDni().equals(dni)) {
                     return user;
                 }
@@ -325,8 +325,8 @@ public class Hotel {
     public void uploadEmployee()
     {
         ArrayList<Employee> e = new ArrayList<>();
-        Employee employee1 = new Employee("Maria Marta", "Serra Lima", "23535421", "lamari@gmail.com", "serra","lima",223458475);
-        Employee employee2 = new Employee("Fernando", "Fernandez", "50232520", "fernandito@gmail.com", "fer","nando",22354214);
+        Employee employee1 = new Employee("Maria Marta", "Serra Lima", 23535421, "lamari@gmail.com", "serra","lima",223458475);
+        Employee employee2 = new Employee("Fernando", "Fernandez", 50232520, "fernandito@gmail.com", "fer","nando",22354214);
         e.add(employee1);
         e.add(employee2);
         employeeList = e;
@@ -336,16 +336,16 @@ public class Hotel {
     public void uploadAdmin(){
 
         ArrayList<Admin> a = new ArrayList<>();
-        Admin admin = new Admin("Alex", "Turner", "84524135", "turner@gmail.com", "elalex","123",223458475);
+        Admin admin = new Admin("Alex", "Turner", 84524135, "turner@gmail.com", "elalex","123",223458475);
         a.add(admin);
         adminList = a;
         FileHelper.setAdminToJson(adminList);
     }
 
     public void uploadPassenger(){
-        ArrayList<Passenger> p = new ArrayList<>();
-        Passenger passenger = new Passenger("Mercedez", "Sosa", "1256324","mercedita@gmail.com", "merced", "123", 52363648, "Chaco", "Buenos aires");
-        p.add(passenger);
+        ArrayList<Guest> p = new ArrayList<>();
+        Guest Guest = new Guest("Mercedez", "Sosa", 1256324,"mercedita@gmail.com", "merced", "123", 52363648, "Chaco", "Buenos aires");
+        p.add(Guest);
         passengerList = p;
         FileHelper.setPassengersToJson(passengerList);
     }
@@ -371,11 +371,11 @@ public class Hotel {
         this.bookingList = bookingList;
     }
 
-    public ArrayList<Passenger> getPassengerList() {
+    public ArrayList<Guest> getPassengerList() {
         return passengerList;
     }
 
-    public void setPassengerList(ArrayList<Passenger> passengerList) {
+    public void setPassengerList(ArrayList<Guest> passengerList) {
         this.passengerList = passengerList;
     }
 

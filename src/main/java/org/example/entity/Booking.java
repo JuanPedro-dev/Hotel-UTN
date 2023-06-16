@@ -1,9 +1,7 @@
-package org.example.entities;
+package org.example.entity;
 
 import java.nio.ByteBuffer;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -14,7 +12,7 @@ public class Booking {
     /*[Atributos]*/
 
     private String bookingId ; // id unico de 12 caracteres
-    private Passenger bookingPassenger;
+    private Guest bookingPassenger;
     private Room bookedRoom;
     private BookingState bookingState;  // ir seteando de acuerdo a la fecha
     private LocalDate checkInDate;
@@ -24,7 +22,7 @@ public class Booking {
 
     /*[Constructores]*/
 
-    public Booking(Passenger bookingPassenger , Room bookedRoom, LocalDate checkInDate, LocalDate checkOutDate, BookingState bookingState) {
+    public Booking(Guest bookingPassenger , Room bookedRoom, LocalDate checkInDate, LocalDate checkOutDate, BookingState bookingState) {
         this.bookingPassenger= bookingPassenger;
         this.bookedRoom = bookedRoom;
         this.bookingState = bookingState;
@@ -67,11 +65,11 @@ public class Booking {
         return bookingId;
     }
 
-    public Passenger getBookingPassenger() {
+    public Guest getBookingPassenger() {
         return bookingPassenger;
     }
 
-    public void setBookingPassenger(Passenger bookingPassenger) {
+    public void setBookingPassenger(Guest bookingPassenger) {
         this.bookingPassenger = bookingPassenger;
     }
 

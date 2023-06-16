@@ -1,4 +1,4 @@
-package org.example.Entities;
+package org.example.entity;
 
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ public abstract class  User {
     //ToDo ver si agregamos ID
     private String name;
     private String lastName;
-    private int dni;
+    private Integer dni;
     private String user;
     private String password;
     private String email;
@@ -21,7 +21,7 @@ public abstract class  User {
     public User() {
     }
 
-    public User(String name, String lastName, int dni, String user, String password, String email, long phoneNumber) {
+    public User(String name, String lastName, Integer dni, String user, String password, String email, long phoneNumber) {
         this.name = name;
         this.lastName = lastName;
         this.dni = dni;
@@ -50,11 +50,11 @@ public abstract class  User {
         this.lastName = lastName;
     }
 
-    public int getDni() {
+    public Integer getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(Integer dni) {
         this.dni = dni;
     }
 
@@ -110,17 +110,6 @@ public abstract class  User {
 
     @Override
     public String toString() {
-        /*return "User{" +
-                "name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dni=" + dni +
-                ", user='" + user + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                '}';
-
-         */
         return "User{" +
                 "name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -131,6 +120,5 @@ public abstract class  User {
                 ", phoneNumber=" + phoneNumber +
                 '}';
     }
-    //endregion
 
 }

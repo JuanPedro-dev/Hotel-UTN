@@ -1,6 +1,4 @@
-package org.example.Entities;
-
-import org.example.Entities.User;
+package org.example.entity;
 
 public class Guest extends User {
 

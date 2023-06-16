@@ -1,4 +1,4 @@
-package org.example.Entities.Enums;
+package org.example.entity.enums;
 
 public enum BookingState {
     PENDING,
