@@ -51,7 +51,7 @@ public class SerializerGson <T>{
                 case "class org.example.entity.Booking" -> listType = new TypeToken<ArrayList<Booking>>(){}.getType();
                 case "class org.example.entity.Employee" -> listType = new TypeToken<ArrayList<Employee>>(){}.getType();
                 case "class org.example.entity.Guest" -> listType = new TypeToken<ArrayList<Guest>>(){}.getType();
-                case "class org.example.entity.Hotel" -> listType = new TypeToken<ArrayList<Hotel>>(){}.getType();
+                //case "class org.example.entity.Hotel" -> listType = new TypeToken<ArrayList<Hotel>>(){}.getType();
                 case "class org.example.entity.Room" -> listType = new TypeToken<ArrayList<Room>>(){}.getType();
 
             }

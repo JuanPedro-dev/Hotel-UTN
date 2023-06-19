@@ -2,7 +2,7 @@ package org.example.entity;
 
 public class Guest extends User {
 
-    //region Constructors
+    //region [Constructors]
     public Guest() {
     }
 
@@ -11,7 +11,7 @@ public class Guest extends User {
     }
     //endregion
 
-    //region Overrides
+    //region [Overrides]
 
     @Override
     public String toString() {

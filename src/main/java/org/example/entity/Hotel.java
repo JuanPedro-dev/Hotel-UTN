@@ -1,3 +1,4 @@
+/*
 package org.example.entity;
 
 import org.example.entity.enums.BookingState;
@@ -16,7 +17,8 @@ public class Hotel {
     private ArrayList<Admin> adminList;
     private ArrayList<Employee> employeeList;
 
-    /* [Constructores] */
+ [Constructores]
+
 
     public Hotel()
     {
@@ -36,9 +38,11 @@ public class Hotel {
         FileHelper.setBookingsToJson(this.bookingList);
     }
 
-    /* [Métodos] */
+ [Métodos]
 
-    /*******************************Booking**********************************/
+
+******************************Booking*********************************
+
     public boolean removeBooking(Booking bookingDeleted)
     {
         if (bookingList != null) {
@@ -201,7 +205,8 @@ public class Hotel {
         return null;
     }
 
-    /*******************************Guest**********************************/
+******************************Guest*********************************
+
     public boolean addPassenger(Guest newPassenger)
     {
         return passengerList.add(newPassenger);
@@ -219,7 +224,8 @@ public class Hotel {
         return null;
     }
 
-    /*******************************Room**********************************/
+******************************Room*********************************
+
 
     public void setProductToRoomService(int productChoice, Booking booking)
     {
@@ -350,7 +356,8 @@ public class Hotel {
         FileHelper.setPassengersToJson(passengerList);
     }
 
-    /********************************Getters & Setters ***********************************/
+*******************************Getters & Setters **********************************
+
     public ArrayList<Room> getRoomList()
     {
         return roomList;
@@ -406,3 +413,4 @@ public class Hotel {
     }
 
 }
+*/

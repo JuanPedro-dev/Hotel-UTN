@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public abstract class  User {
 
-    //region Attributes
+    //region [Attributes]
 
     //ToDo ver si agregamos ID
     private String name;
@@ -16,7 +16,7 @@ public abstract class  User {
     private long phoneNumber;
     //endregion
 
-    //region Constructors
+    //region [Constructors]
 
     public User() {
     }
@@ -32,7 +32,7 @@ public abstract class  User {
     }
     //endregion
 
-    //region Getters and Setters
+    //region [Getters and Setters]
 
     public String getName() {
         return name;
@@ -93,7 +93,7 @@ public abstract class  User {
 
     //endregion
 
-    //region Overrides
+    //region [Overrides]
 
     @Override
     public boolean equals(Object o) {
@@ -120,5 +120,5 @@ public abstract class  User {
                 ", phoneNumber=" + phoneNumber +
                 '}';
     }
-
+//endregion
 }

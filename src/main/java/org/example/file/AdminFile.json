@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Lionel",
+    "lastName": "Messi",
+    "dni": "84524135",
+    "email": "lMessi@gmail.com",
+    "user": "admin",
+    "password": "admin",
+    "phoneNumber": 223458475
+  }
+]

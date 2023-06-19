@@ -1,5 +1,7 @@
 package org.example.entity;
 
+import org.example.entity.enums.BookingState;
+
 import java.nio.ByteBuffer;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -8,8 +10,8 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 
 public class Booking {
+//region [Atributos]
 
-    /*[Atributos]*/
 
     private String bookingId ; // id unico de 12 caracteres
     private Guest bookingPassenger;
@@ -19,8 +21,10 @@ public class Booking {
     private LocalDate checkOutDate;
     private double spentMoney;
 
+//endregion
 
-    /*[Constructores]*/
+//region [Constructores]
+
 
     public Booking(Guest bookingPassenger , Room bookedRoom, LocalDate checkInDate, LocalDate checkOutDate, BookingState bookingState) {
         this.bookingPassenger= bookingPassenger;
@@ -34,8 +38,66 @@ public class Booking {
 
     public Booking() {
     }
+//endregion
 
-    /*[Métodos]*/
+//region [Getters & Setters]
+
+
+public BookingState getBookingState() {
+    return bookingState;
+}
+
+public void setBookingState(BookingState bookingState) {
+    this.bookingState = bookingState;
+}
+
+public String getBookingId() {
+    return bookingId;
+}
+
+public Guest getBookingPassenger() {
+    return bookingPassenger;
+}
+
+public void setBookingPassenger(Guest bookingPassenger) {
+    this.bookingPassenger = bookingPassenger;
+}
+
+public Room getBookedRoom() {
+    return bookedRoom;
+}
+
+public void setBookedRoom(Room bookedRoom) {
+    this.bookedRoom = bookedRoom;
+}
+
+public LocalDate getCheckInDate() {
+    return checkInDate;
+}
+
+public void setCheckInDate(LocalDate checkInDate) {
+    this.checkInDate = checkInDate;
+}
+
+public LocalDate getCheckOutDate() {
+    return checkOutDate;
+}
+
+public void setCheckOutDate(LocalDate checkOutDate) {
+    this.checkOutDate = checkOutDate;
+}
+
+public double getSpentMoney() {
+    return spentMoney;
+}
+
+public void setSpentMoney(double spentMoney) {
+    this.spentMoney = spentMoney;
+}
+//endregion
+
+//region [Métodos]
+
 
     // calcular los dias entre checkin y check out
     public static long reservedDays (LocalDate checkInDate, LocalDate checkOutDate){
@@ -50,61 +112,9 @@ public class Booking {
         return Long.toString(l, Character.MAX_RADIX);
     }
 
+//endregion
 
-    /*[Getters & Setters]*/
-
-    public BookingState getBookingState() {
-        return bookingState;
-    }
-
-    public void setBookingState(BookingState bookingState) {
-        this.bookingState = bookingState;
-    }
-
-    public String getBookingId() {
-        return bookingId;
-    }
-
-    public Guest getBookingPassenger() {
-        return bookingPassenger;
-    }
-
-    public void setBookingPassenger(Guest bookingPassenger) {
-        this.bookingPassenger = bookingPassenger;
-    }
-
-    public Room getBookedRoom() {
-        return bookedRoom;
-    }
-
-    public void setBookedRoom(Room bookedRoom) {
-        this.bookedRoom = bookedRoom;
-    }
-
-    public LocalDate getCheckInDate() {
-        return checkInDate;
-    }
-
-    public void setCheckInDate(LocalDate checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public void setCheckOutDate(LocalDate checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
-    public double getSpentMoney() {
-        return spentMoney;
-    }
-
-    public void setSpentMoney(double spentMoney) {
-        this.spentMoney = spentMoney;
-    }
-
+//region Overrides
     @Override
     public String toString() {
         return "\t [Reserva]\n" +
@@ -117,4 +127,5 @@ public class Booking {
                 "Dinero gastado: [" + spentMoney +"] \n" +
                 "***";
     }
+//endregion
 }
