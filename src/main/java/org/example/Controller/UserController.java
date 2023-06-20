@@ -10,50 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserController {
-    public static void viewUsersMenu() {
-        System.out.println("*-*-*-*-*-*-*-***Menu Usuarios****-*-*-*-*-*-*");
-        System.out.println("1. Listar Usuarios");
-        System.out.println("2. Agregar Usuario");
-        System.out.println("3. Modificar Usuario");
-        System.out.println("4. Borrar Usuario");
-        System.out.println("0. Salir");
-    }
 
-
-    /**
-     * Controller method for the admin menu
-     * @param scanner
-     */
-    public static void controllerUserMenu(Scanner scanner) {
-        boolean flag = true;
-        do {
-            viewUsersMenu();
-            String option = scanner.nextLine();
-            if (HotelController.isInteger(option)) {
-                switch (option) {
-                    case "1":
-                        listOfAllUsers().forEach(System.out::println);
-                        break;
-                    case "2":
-                        addUser(scanner);
-                        break;
-                    case "3":
-                        updateUser(scanner);
-                        break;
-                    case "4":
-                        deleteUser(scanner);
-                        break;
-                    case "0":
-                        AdminController.controllerAdminMenu(scanner);
-                        break;
-                    default:
-                        System.out.println("Incorrect Input.");
-                }
-            }
-            else flag = HotelController.messageError();
-        } while (flag);
-    }
-
+    //region [CRUD]
 
     /**
      * This method allows the user to add a new user to the system.
@@ -124,7 +82,7 @@ public class UserController {
         System.out.println("Enter para continuar..");
         scanner.nextLine();             //cleaned buffer
         System.out.println("Ingrese el tipo de usuario que desea modificar: \n");
-        System.out.println(" 1. Admin \n 2. Employee \n 3. Guest");
+        System.out.println(" 1. Admin \n 2. Employee");
         int userType = scanner.nextInt();
         scanner.nextLine();             //cleaned buffer
 
@@ -144,14 +102,6 @@ public class UserController {
                 Employee updateEmployee = employeeController.getById(dni);
                 if (updateEmployee != null)
                     employeeController.update(updateEmployee);
-                break;
-            case 3:
-                GuestController guestController = new GuestController();
-                System.out.println("Ingrese DNI del huesped");
-                dni = scanner.nextInt();
-                Guest updateGuest = guestController.getById(dni);
-                if (updateGuest != null)
-                    guestController.update(updateGuest);
                 break;
             default:
                 System.out.println("Invalid user type.");
@@ -178,31 +128,23 @@ public class UserController {
         System.out.println("Ingrese el tipo de usuario que desea borrar:");
         System.out.println("1. Admin");
         System.out.println("2. Employee");
-        System.out.println("3. Guest");
         int userType = scanner.nextInt();
         scanner.nextLine(); // Limpiar el búfer
 
         switch (userType) {
             case 1:
                 AdminController adminController = new AdminController();
-                System.out.println("Ingrese el dni que desea eliminar");
+                System.out.println("Ingrese el DNI que desea eliminar");
                 dni = scanner.nextInt();
                 if (adminController.getById(dni) != null)
                     adminController.delete(dni);
                 break;
             case 2:
                 EmployeeController employeeController = new EmployeeController();
-                System.out.println("Ingrese el dni que desea eliminar");
+                System.out.println("Ingrese el DNI que desea eliminar");
                 dni = scanner.nextInt();
                 if(employeeController.getById(dni) != null)
                     employeeController.delete(dni);
-                break;
-            case 3:
-                GuestController guestController = new GuestController();
-                System.out.println("Ingrese el dni que desea eliminar");
-                dni = scanner.nextInt();
-                if (guestController.getById(dni) != null)
-                    guestController.delete(dni);
                 break;
             default:
                 System.out.println("Invalid user type.");
@@ -210,7 +152,9 @@ public class UserController {
         }
     }
 
+    //endregion
 
+    //region [Utilities]
     /**
      * Retrieves a list of all users, including admins and employees.
      *
@@ -250,4 +194,53 @@ public class UserController {
         }
         return userFound;
     }
+    //endregion
+
+    //region [Menu]
+    public static void viewUsersMenu() {
+        System.out.println("*-*-*-*-*-*-*-***Menu Usuarios****-*-*-*-*-*-*");
+        System.out.println("1. Listar Usuarios");
+        System.out.println("2. Agregar Usuario");
+        System.out.println("3. Modificar Usuario");
+        System.out.println("4. Borrar Usuario");
+        System.out.println("0. Salir");
+    }
+
+
+    /**
+     * Controller method for the admin menu
+     * @param scanner
+     */
+    public static void UserMenu(Scanner scanner) {
+        boolean flag = true;
+        do {
+            viewUsersMenu();
+            String option = scanner.nextLine();
+            if (HotelController.isInteger(option)) {
+                switch (option) {
+                    case "1":
+                        listOfAllUsers().forEach(System.out::println);
+                        break;
+                    case "2":
+                        addUser(scanner);
+                        break;
+                    case "3":
+                        updateUser(scanner);
+                        break;
+                    case "4":
+                        deleteUser(scanner);
+                        break;
+                    case "0":
+                        AdminController.adminMenu(scanner);
+                        break;
+                    default:
+                        System.out.println("Incorrect Input.");
+                }
+            }
+            else flag = HotelController.messageError();
+        } while (flag);
+    }
+
+    //endregion
+
 }

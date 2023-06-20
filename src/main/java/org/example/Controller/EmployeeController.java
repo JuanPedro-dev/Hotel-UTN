@@ -46,9 +46,9 @@ public class EmployeeController {
 
 
     /**
-     * Updates the attributes of an employee.
+     * Updates an employee with new attribute values based on user input.
      *
-     * @param scanner The Scanner object used to read user input.
+     * @param updateEmployee The Employee object to be updated.
      */
     public void update(Employee updateEmployee){
         String flag = null;
@@ -122,5 +122,43 @@ public class EmployeeController {
             System.out.println("Error: " + e.getMessage());
             return null;
         }
+    }
+
+    public static void viewEmployeeMenu(){
+        System.out.println("*-*-*-*-*-*-*-***Bates Motel****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-***Menu Empleado****-*-*-*-*-*");
+        System.out.println("1. Reserva");
+        System.out.println("2. Huesped");
+        System.out.println("3. Habitaciones");
+        System.out.println("0. Salir");
+    }
+
+    public static void employeeMenu(Scanner scanner){
+        boolean flag = true;
+        do {
+            viewEmployeeMenu();
+            String option = scanner.nextLine();
+            if (HotelController.isInteger(option)) {
+                switch (option) {
+                    case "1":
+                        // ToDo llamar al menu de reservas
+                        BookingController.bookingMenu(scanner);
+                        break;
+                    case "2":
+                        // ToDo llamar al menu de huespedes
+                        GuestController.guestMenu(scanner);
+                        break;
+                    case "3":
+                        // ToDo llamar al menu de habitaciones
+                        RoomController.roomMenu(scanner);
+                        break;
+                    case "0":
+                        HotelController.login();
+                        break;
+                    default:
+                        System.out.println("Ingreso incorrectamente.");
+                }
+            } else flag = HotelController.messageError();
+        }while(flag);
     }
 }

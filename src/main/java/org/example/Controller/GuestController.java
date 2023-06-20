@@ -1,5 +1,7 @@
 package org.example.Controller;
 
+import org.example.entity.Admin;
+import org.example.entity.Employee;
 import org.example.entity.Guest;
 import org.example.exceptions.AdminExceptions;
 import org.example.exceptions.GuestExceptions;
@@ -12,12 +14,16 @@ public class GuestController {
     private static final Scanner scanner = new Scanner(System.in);
     GuestRepository guestRepository = new GuestRepository();
 
-
+    //region [CRUD]
     /**
      * Lists all the guest in the guest repository and prints them to the console.
      */
     public void list() {
-        guestRepository.list().forEach(System.out::println);
+        List<Guest> guests = guestRepository.list();
+        if (guests.isEmpty())
+            System.out.println("No hay huespedes");
+        else
+            guests.forEach(System.out::println);
     }
 
 
@@ -34,10 +40,34 @@ public class GuestController {
     /**
      * Adds a new guest to the guest repository.
      *
-     * @param newGuest The admin object to be added.
+     * @param scanner the Scanner object used for user input
      */
-    public void add(Guest newGuest) {
-        guestRepository.add(newGuest);
+    public void add(Scanner scanner) {
+            Guest newGuest = new Guest();
+            String controller = "N";
+            System.out.println("*-*-*-*-*-*-*-***Crear Huesped****-*-*-*-*-*-*");
+            do {
+                System.out.println("Enter para continuar..");
+                scanner.nextLine();             //cleaned buffer
+                System.out.println("INGRESE LOS DATOS");
+                System.out.println("Nombre: ");
+                newGuest.setName(scanner.nextLine());
+                System.out.println("Apellido: ");
+                newGuest.setLastName(scanner.nextLine());
+                System.out.println("DNI: ");
+                newGuest.setDni(scanner.nextInt());
+                scanner.nextLine();
+                System.out.println("Email: ");
+                newGuest.setEmail(scanner.nextLine());
+                System.out.println("Telefono: ");
+                newGuest.setPhoneNumber(scanner.nextLong());
+                scanner.nextLine();             //cleaned buffer
+                System.out.println("Enter para continuar..");
+                scanner.nextLine();             //cleaned buffer
+                guestRepository.add(newGuest);
+                System.out.println("Desea cargar otro usuario? S/N");
+                controller = scanner.nextLine().toUpperCase();
+            } while (controller.equals("S"));
     }
 
 
@@ -51,10 +81,9 @@ public class GuestController {
     }
 
     /**
-     *Updates the information of a guest.
+     * Updates the information of a guest.
      *
-     *
-     *@param scanner The scanner object for user input.
+     * @param updateGuest the guest object containing the updated information
      */
     public void update(Guest updateGuest){
         String flag = null;
@@ -116,4 +145,68 @@ public class GuestController {
             return null;
         }
     }
+    //endregion
+
+    //region [Menu]
+
+    /**
+     * Displays the guest menu options.
+     */
+    public static void viewGuestMenu(){
+        System.out.println("*-*-*-*-*-*-*-***Bates Motel****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-***Menu Huesped****-*-*-*-*-*");
+        System.out.println("1. Crear un Huesped");
+        System.out.println("2. Listar Huespedes");
+        System.out.println("3. Modificar un Huesped");
+        System.out.println("4. Eliminar un Huesped");
+        System.out.println("0. Salir");
+    }
+
+    /**
+     * Displays the guest menu and handles user interactions.
+     *
+     * @param scanner the Scanner object used for user input
+     */
+    public static void guestMenu(Scanner scanner){
+        int dni;
+        boolean flag = true;
+        GuestController guestController = new GuestController();
+        do {
+            viewGuestMenu();
+            String option = scanner.nextLine();
+            if (HotelController.isInteger(option)) {
+                switch (option) {
+                    case "1":
+                        //ToDo PROBADO
+                        guestController.add(scanner);
+                        break;
+                    case "2":
+                        //ToDo PROBADO
+                        guestController.list();
+                        break;
+                    case "3":
+                        //ToDo PROBADO
+                        System.out.println("Ingrese DNI del huesped");
+                        dni = scanner.nextInt();
+                        Guest updateGuest = guestController.getById(dni);
+                        if (updateGuest != null)
+                            guestController.update(updateGuest);
+                        break;
+                    case "4":
+                        //ToDo PROBADO
+                        System.out.println("Ingrese el DNI del huesped que desea eliminar");
+                        dni = scanner.nextInt();
+                        if (guestController.getById(dni) != null)
+                            guestController.delete(dni);
+                        break;
+                    case "0":
+                        EmployeeController.employeeMenu(scanner);
+                        break;
+                    default:
+                        System.out.println("Ingreso incorrectamente.");
+                }
+            } else flag = HotelController.messageError();
+        }while(flag);
+    }
+    //endregion
 }

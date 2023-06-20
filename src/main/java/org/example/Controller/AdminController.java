@@ -16,7 +16,7 @@ public class AdminController {
     public AdminController() {
     }
 
-
+    //region [CRUD]
     /**
      * Lists all the admins in the admin repository and prints them to the console.
      */
@@ -130,20 +130,25 @@ public class AdminController {
             return null;
         }
     }
+    //endregion
 
+    //region [Menu]
 
+    /**
+     * Displays the admin menu options.
+     */
     public static void viewAdminMenu() {
         System.out.println("*-*-*-*-*-*-*-***UTN Hotel****-*-*-*-*-*-*");
         System.out.println("*-*-*-*-*-*-*-***Admin Menu****-*-*-*-*-*");
-        System.out.println("1. Rooms");
-        System.out.println("2. Guest");
-        System.out.println("3. Reservations");
-        System.out.println("4. Users");
-        System.out.println("0. Exit");
-        System.out.println("Enter an option: ");
+        System.out.println("1. Habitaciones");
+        System.out.println("2. Huespedes");
+        System.out.println("3. Reservas");
+        System.out.println("4. Usuarios");
+        System.out.println("0. Salir");
+        System.out.println("Ingrese una opcion: ");
     }
 
-    public static void controllerAdminMenu(Scanner scanner) {
+    public static void adminMenu(Scanner scanner) {
         boolean flag = true;
         do {
             viewAdminMenu();
@@ -152,28 +157,28 @@ public class AdminController {
                 switch (option) {
                     case "1":
                         //ToDo menu de rooms
-                        //controllerRoomsMenu(hotel);
+                        RoomController.roomMenu(scanner);
                         break;
                     case "2":
                         //ToDo menu de guest
-                        //controllerGuestMenu(hotel);
+                        GuestController.guestMenu(scanner);
                         break;
                     case "3":
                         //ToDo menu de booking
-                        //controllerBooking(hotel);
+                        BookingController.bookingMenu(scanner);
                         break;
                     case "4":
-                        UserController.controllerUserMenu(scanner);
+                        UserController.UserMenu(scanner);
                         break;
                     case "0":
                         HotelController.login();
                         break;
                     default:
-                        System.out.println("Incorrect Input.");
+                        System.out.println("Ingreso incorrectamente.");
                 }
             }
             else flag = HotelController.messageError();
         } while (flag);
     }
-
+    //endregion
 }

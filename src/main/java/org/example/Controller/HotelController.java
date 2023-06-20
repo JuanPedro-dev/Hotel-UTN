@@ -33,8 +33,8 @@ public class HotelController {
 
                     userFound = UserController.isValidUser(username, password);
                     if (userFound != null) {
-                        if(userFound instanceof Admin) AdminController.controllerAdminMenu(scanner); //ToDo mandar menu de admin ;
-                        if(userFound instanceof Employee) System.out.println("Menu Employee");//ToDo mandar menu de employee ;
+                        if(userFound instanceof Admin) AdminController.adminMenu(scanner);
+                        if(userFound instanceof Employee) EmployeeController.employeeMenu(scanner);
                     }else {
                         flag = messageError();
                         if (!flag) {
