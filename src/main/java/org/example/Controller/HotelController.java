@@ -31,9 +31,9 @@ public class HotelController {
                     System.out.print("Password: ");
                     password = scanner.nextLine();
 
-                    userFound = isValidUser(username, password);
+                    userFound = UserController.isValidUser(username, password);
                     if (userFound != null) {
-                        if(userFound instanceof Admin) System.out.println("Menu Admin"); //ToDo mandar menu de admin ;
+                        if(userFound instanceof Admin) AdminController.controllerAdminMenu(scanner); //ToDo mandar menu de admin ;
                         if(userFound instanceof Employee) System.out.println("Menu Employee");//ToDo mandar menu de employee ;
                     }else {
                         flag = messageError();
@@ -53,34 +53,6 @@ public class HotelController {
         }
     }
 
-    public static ArrayList<User> listOfAllUsers(){
-        ArrayList<User> users = new ArrayList<>();
-
-        AdminController adminController = new AdminController();
-        /*EmployeeRepository employeeController = new EmployeeRepository();
-        GuestRepository guestController = new GuestRepository();*/
-
-        //ToDo pasar listas desde el controller
-        users.addAll(adminController.getAllAdmins());
-//        users.addAll(employeeController.getAllAdmins());
-//        users.addAll(guestController.getAllAdmins());
-        return users;
-    }
-
-    public static User isValidUser(String username, String pass) {
-        User userFound = null;
-        List<User> users = listOfAllUsers();
-        if (!users.isEmpty()) {
-            for (User u : users) {
-                if (u.getUser().equals(username)) {
-                    if (u.getPassword().equals(pass)) {
-                        userFound = u;
-                    }
-                }
-            }
-        }
-        return userFound;
-    }
     static boolean messageError () {
         String answ;
         System.out.println("Enter para continuar..");
@@ -89,6 +61,15 @@ public class HotelController {
         answ = scanner.nextLine().toUpperCase();
         if(answ.equals("S")) return true;
         return false;
+    }
+
+    static boolean isInteger (String str){
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 }

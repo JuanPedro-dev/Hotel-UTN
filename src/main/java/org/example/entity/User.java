@@ -30,6 +30,14 @@ public abstract class  User {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
+
+    public User(String name, String lastName, Integer dni, String email, long phoneNumber) {
+        this.name = name;
+        this.lastName = lastName;
+        this.dni = dni;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
     //endregion
 
     //region [Getters and Setters]
@@ -110,7 +118,7 @@ public abstract class  User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "{" +
                 "name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", dni=" + dni +

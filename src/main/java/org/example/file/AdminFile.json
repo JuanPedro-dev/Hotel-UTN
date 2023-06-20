@@ -2,10 +2,19 @@
   {
     "name": "Lionel",
     "lastName": "Messi",
-    "dni": "84524135",
-    "email": "lMessi@gmail.com",
+    "dni": 84524135,
     "user": "admin",
     "password": "admin",
+    "email": "lMessi@gmail.com",
     "phoneNumber": 223458475
+  },
+  {
+    "name": "Enzo",
+    "lastName": "Perez",
+    "dni": 41565488,
+    "user": "enzoPe",
+    "password": "enzope24",
+    "email": "enzope@gmail.com",
+    "phoneNumber": 2236193297
   }
 ]

@@ -76,7 +76,13 @@ public class GuestRepository implements IRepository<Guest, Integer> {
 
     @Override
     public void delete(Integer dni) {
-        this.guests.removeIf(guest -> guest.getDni().equals(dni));
+        if (this.guests.removeIf(guest -> guest.getDni().equals(dni))) {
+            saveToFile();
+            System.out.println("Eliminado exitosamente");
+        } else {
+            throw new GuestExceptions("No se pudo eliminar el huesped");
+        }
+
     }
 
 }

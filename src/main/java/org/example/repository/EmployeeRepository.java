@@ -76,7 +76,14 @@ public class EmployeeRepository implements IRepository<Employee, Integer>{
 
     @Override
     public void delete(Integer dni) {
-        this.employees.removeIf(employee -> employee.getDni().equals(dni));
+        if (this.employees.removeIf(employee -> employee.getDni().equals(dni))) {
+            saveToFile();
+            System.out.println("Eliminado exitosamente");
+        }
+        else {
+            throw new EmployeeExceptions("No se pudo eliminar el empleado");
+        }
+
     }
 
 
