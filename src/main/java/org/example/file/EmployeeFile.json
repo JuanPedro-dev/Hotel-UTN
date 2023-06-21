@@ -1,11 +1,11 @@
 [
   {
-    "name": "empleado",
-    "lastName": "empleadito",
-    "dni": 41565481,
+    "name": "Empleado",
+    "lastName": "Empleado",
+    "dni": 123456789,
     "user": "empleado",
     "password": "empleado",
-    "email": "empleadito@gmail",
-    "phoneNumber": 22345677
+    "email": "Empleado@gmail.com",
+    "phoneNumber": 123456789
   }
 ]

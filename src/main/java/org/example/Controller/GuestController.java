@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class GuestController {
+
     private static final Scanner scanner = new Scanner(System.in);
     GuestRepository guestRepository = new GuestRepository();
 
@@ -45,7 +46,7 @@ public class GuestController {
     public void add(Scanner scanner) {
             Guest newGuest = new Guest();
             String controller = "N";
-            System.out.println("*-*-*-*-*-*-*-***Crear Huesped****-*-*-*-*-*-*");
+            System.out.println("*-*-*-*-*-*-*-**** Crear Huesped *****-*-*-*-*-*-*");
 
         while (controller.equals("S")) {
 
@@ -128,7 +129,6 @@ public class GuestController {
                         break;
                     default:
                         System.out.println("Opción incorrecta.");
-
                 }
             }
 
@@ -165,13 +165,14 @@ public class GuestController {
      * Displays the guest menu options.
      */
     public static void viewGuestMenu(){
-        System.out.println("*-*-*-*-*-*-*-***UTN Motel****-*-*-*-*-*-*");
-        System.out.println("*-*-*-*-*-*-*-***Menu Huesped****-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-**** UTN Motel ****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-**** Menu Huesped ****-*-*-*-*-*");
         System.out.println("1. Crear un Huesped");
         System.out.println("2. Listar Huespedes");
         System.out.println("3. Modificar un Huesped");
         System.out.println("4. Eliminar un Huesped");
         System.out.println("0. Salir");
+        System.out.print("Opción: ");
     }
 
     /**
@@ -216,7 +217,7 @@ public class GuestController {
                 case "0":
                     break;
                 default:
-                    System.out.println("Ingreso incorrectamente.");
+                    System.out.println("Opción incorrecta.");
             }
         }
     }

@@ -9,25 +9,29 @@ import java.util.Scanner;
 public class HotelController {
 
     private static final Scanner scanner = new Scanner(System.in);
-    public static void login()
-    {
-        String username, password;
-        String option = "s";
-        User userFound;
-        boolean flag = true;
 
-        System.out.println("\n*-*-*-*-*-*-*-***UTN Hotel***-*-*-*-*-*-*");
-        System.out.println("*-*-*-*-*-*-*-***LOGIN***-*-*-*-*-*-*");
+
+    public static void login(){
+
+        String option = "";
 
         while(!option.equals("0")) {
+
+            System.out.println("\n*-*-*-*-*-*-*-**** UTN Hotel ****-*-*-*-*-*-*");
+            System.out.println("*-*-*-*-*-*-*-**** LOGIN ****-*-*-*-*-*-*");
             System.out.println("1. Login ");
             System.out.println("0. Exit");
             System.out.print("Opción: ");
+
             option = scanner.nextLine();
 
             switch (option) {
                 case "1":
+                    boolean flag = true;
+
                     while (flag) {
+                        String username, password;
+                        User userFound;
 
                         System.out.print("User: ");
                         username = scanner.nextLine();
@@ -39,23 +43,26 @@ public class HotelController {
                         if (userFound != null) {
                             if (userFound instanceof Admin) AdminController.adminMenu(scanner);
                             if (userFound instanceof Employee) EmployeeController.employeeMenu(scanner);
-                            login();
+                            flag = false;
+
                         } else {
                             flag = messageError();
                             if (!flag) System.out.println("No se ha encontrado su usuario... \n");
                         }
-
                     }
+
+                    break;
                 case "0":
-                    System.out.println("*-*-***Gracias por utilizar UTN Hotel***-*-*");
+                    System.out.println("\n*-*-**** Gracias por utilizar UTN Hotel ****-*-*");
                     System.exit(0);
                     break;
                 default:
                     System.out.println("Opción incorrecta.");
-                    login();
             }
         }
     }
+
+
 
     static boolean messageError () {
         String answ;

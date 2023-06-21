@@ -28,7 +28,7 @@ public class UserController {
         String name, lastName, email, user, password;
         Integer dni;
         long phone;
-        System.out.println("*-*-*-*-*-*-*-***Crear Usuario****-*-*-*-*-*-*");
+        System.out.println("\n*-*-*-*-*-*-*-**** Crear Usuario ****-*-*-*-*-*-*");
         do {
             System.out.println("Enter para continuar..");
             scanner.nextLine();             //cleaned buffer
@@ -78,11 +78,12 @@ public class UserController {
     //ToDo PROBADO -> bug en el menu
     public static void updateUser(Scanner scanner){
         int dni;
-        System.out.println("*-*-*-*-*-*-*-***Modificar Usuario****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-**** Modificar Usuario ****-*-*-*-*-*-*");
         System.out.println("Enter para continuar..");
         scanner.nextLine();             //cleaned buffer
         System.out.println("Ingrese el tipo de usuario que desea modificar: \n");
         System.out.println(" 1. Admin \n 2. Employee");
+        System.out.print("Opción: ");
         int userType = scanner.nextInt();
         scanner.nextLine();             //cleaned buffer
 
@@ -104,8 +105,7 @@ public class UserController {
                     employeeController.update(updateEmployee);
                 break;
             default:
-                System.out.println("Invalid user type.");
-                break;
+                System.out.println("Opción incorrecta.");
         }
     }
 
@@ -121,7 +121,7 @@ public class UserController {
         //ToDo PROBADO -> BORRA OK
         //ToDo Falta implementar Guest y Employee
         int dni;
-        System.out.println("*-*-*-*-*-*-*-***Borrar Usuario****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-**** Borrar Usuario ****-*-*-*-*-*-*");
         System.out.println("Presione Enter para continuar..");
         scanner.nextLine(); // Limpiar el búfer
 
@@ -147,8 +147,7 @@ public class UserController {
                     employeeController.delete(dni);
                 break;
             default:
-                System.out.println("Invalid user type.");
-                break;
+                System.out.println("Opción incorrecta.");
         }
     }
 
@@ -198,12 +197,13 @@ public class UserController {
 
     //region [Menu]
     public static void viewUsersMenu() {
-        System.out.println("*-*-*-*-*-*-*-***Menu Usuarios****-*-*-*-*-*-*");
+        System.out.println("\n*-*-*-*-*-*-*-**** Menu Usuarios ****-*-*-*-*-*-*");
         System.out.println("1. Listar Usuarios");
         System.out.println("2. Agregar Usuario");
         System.out.println("3. Modificar Usuario");
         System.out.println("4. Borrar Usuario");
         System.out.println("0. Salir");
+        System.out.print("Opción: ");
     }
 
 
@@ -212,9 +212,11 @@ public class UserController {
      * @param scanner
      */
     public static void UserMenu(Scanner scanner) {
+
         String option = "";
 
         while (!option.equals("0")) {
+
             viewUsersMenu();
             option = scanner.nextLine();
 
@@ -235,7 +237,7 @@ public class UserController {
                     AdminController.adminMenu(scanner);
                     break;
                 default:
-                    System.out.println("Incorrect Input.");
+                    System.out.println("Opción incorrecta.");
             }
         }
     }

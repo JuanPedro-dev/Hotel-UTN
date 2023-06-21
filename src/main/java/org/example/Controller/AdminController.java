@@ -140,28 +140,29 @@ public class AdminController {
      * Displays the admin menu options.
      */
     public static void viewAdminMenu() {
-        System.out.println("\n*-*-*-*-*-*-*-***UTN Hotel****-*-*-*-*-*-*");
-        System.out.println("*-*-*-*-*-*-*-***Admin Menu****-*-*-*-*-*");
+        System.out.println("\n*-*-*-*-*-*-*-**** UTN Hotel ****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-**** Admin Menu ****-*-*-*-*-*");
         System.out.println("1. Habitaciones");
         System.out.println("2. Huespedes");
         System.out.println("3. Reservas");
         System.out.println("4. Usuarios");
         System.out.println("0. Salir");
-        System.out.print("Ingrese una opcion: ");
+        System.out.print("Opción: ");
     }
 
     public static void adminMenu(Scanner scanner) {
 
-        viewAdminMenu();
-        String option = scanner.nextLine();
+        String option = "";
 
         while (!option.equals("0")) {
+
+            viewAdminMenu();
+            option = scanner.nextLine();
 
             switch (option) {
                 case "1":
                     //ToDo menu de rooms
                     RoomController.roomMenu(scanner);
-                    adminMenu(scanner);
                     break;
                 case "2":
                     //ToDo menu de guest
@@ -175,10 +176,9 @@ public class AdminController {
                     UserController.UserMenu(scanner);
                     break;
                 case "0":
-                    HotelController.login();
                     break;
                 default:
-                    System.out.println("Ingreso incorrectamente.");
+                    System.out.println("Opción incorrecta.");
             }
         }
     }

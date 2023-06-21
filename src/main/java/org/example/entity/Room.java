@@ -26,7 +26,7 @@ public class Room {
         isAvailable = available;
     }
 
-    public int getRoomNumber() {
+    public Integer getRoomNumber() {
         return roomNumber;
     }
 

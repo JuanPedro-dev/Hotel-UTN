@@ -1,7 +1,6 @@
 package org.example.Controller;
 
 import org.example.entity.Employee;
-import org.example.exceptions.AdminExceptions;
 import org.example.exceptions.EmployeeExceptions;
 import org.example.repository.EmployeeRepository;
 import java.util.List;
@@ -53,7 +52,9 @@ public class EmployeeController {
     public void update(Employee updateEmployee){
         String flag ;
         String option;
+
         do {
+
             if (updateEmployee != null) {
                 System.out.println("Seleccione atributo a cambiar");
                 System.out.println("1. Nombre");
@@ -61,8 +62,11 @@ public class EmployeeController {
                 System.out.println("3. Teléfono");
                 System.out.println("4. Email");
                 System.out.println("5. Usuario");
-                System.out.println("5. Password");
+                System.out.println("6. Password");
+                System.out.print("Opción: ");
+
                 option = scanner.nextLine();
+
                 switch (option) {
                     case "1" -> {
                         System.out.println("Ingrese nuevo nombre");
@@ -97,8 +101,9 @@ public class EmployeeController {
                 }
             }
 
-            System.out.println("Quiere cambiar otro atributo? S/N");
+            System.out.print("¿Quiere cambiar otro atributo? S/N: ");
             flag = scanner.nextLine().toUpperCase();
+
         } while (flag.equals("S"));
 
         employeeRepository.update(updateEmployee);
@@ -123,12 +128,13 @@ public class EmployeeController {
     }
 
     public static void viewEmployeeMenu(){
-        System.out.println("*-*-*-*-*-*-*-***UTN Motel****-*-*-*-*-*-*");
-        System.out.println("*-*-*-*-*-*-*-***Menu Empleado****-*-*-*-*-*");
+        System.out.println("\n*-*-*-*-*-*-*-**** UTN Motel *****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-**** Menu Empleado ****-*-*-*-*-*");
         System.out.println("1. Reserva");
         System.out.println("2. Huesped");
         System.out.println("3. Habitaciones");
         System.out.println("0. Salir");
+        System.out.print("Opción: ");
     }
 
     public static void employeeMenu(Scanner scanner){
@@ -143,7 +149,6 @@ public class EmployeeController {
                 case "1":
                     // ToDo llamar al menu de reservas
                     BookingController.bookingMenu(scanner);
-                    employeeMenu(scanner);
                     break;
                 case "2":
                     // ToDo llamar al menu de huespedes
