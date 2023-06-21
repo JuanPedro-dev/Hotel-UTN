@@ -60,9 +60,11 @@ public class AdminController {
      * @param updateAdmin The Admin object to be updated.
      */
     public void update(Admin updateAdmin){
-        String flag = null;
+        String flag = "";
         String option;
-        do {
+
+        while (flag.equals("S")) {
+
             if (updateAdmin != null) {
                 System.out.println("Seleccione atributo a cambiar");
                 System.out.println("1. Nombre");
@@ -72,43 +74,45 @@ public class AdminController {
                 System.out.println("5. Usuario");
                 System.out.println("6. Password");
                 option = scanner.nextLine();
-                //scanner.nextLine();             //cleaned buffer
-                    switch (option) {
-                        case "1":
-                            System.out.println("Ingrese nuevo nombre");
-                            updateAdmin.setName(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "2":
-                            System.out.println("Ingrese nuevo apellido");
-                            updateAdmin.setLastName(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "3":
-                            System.out.println("Ingrese nuevo teléfono");
-                            updateAdmin.setPhoneNumber(scanner.nextInt());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "4":
-                            System.out.println("Ingrese nuevo email");
-                            updateAdmin.setEmail(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "5":
-                            System.out.println("Ingrese nuevo user");
-                            updateAdmin.setUser(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "6":
-                            System.out.println("Ingrese nuevo password");
-                            updateAdmin.setPassword(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
+
+                switch (option) {
+                    case "1" -> {
+                        System.out.println("Ingrese nuevo nombre");
+                        updateAdmin.setName(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
                     }
+                    case "2" -> {
+                        System.out.println("Ingrese nuevo apellido");
+                        updateAdmin.setLastName(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                    }
+                    case "3" -> {
+                        System.out.println("Ingrese nuevo teléfono");
+                        updateAdmin.setPhoneNumber(scanner.nextInt());
+                        System.out.println("Modificación exitosa");
+                    }
+                    case "4" -> {
+                        System.out.println("Ingrese nuevo email");
+                        updateAdmin.setEmail(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                    }
+                    case "5" -> {
+                        System.out.println("Ingrese nuevo user");
+                        updateAdmin.setUser(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                    }
+                    case "6" -> {
+                        System.out.println("Ingrese nuevo password");
+                        updateAdmin.setPassword(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                    }
+                }
             }
-            System.out.println("Quiere cambiar otro atributo? S/N");
+
+            System.out.print("Quiere cambiar otro atributo? S/N: ");
             flag = scanner.nextLine().toUpperCase();
-        } while (flag.equals("S"));
+
+        }
         adminRepository.update(updateAdmin);
     }
 
@@ -151,12 +155,13 @@ public class AdminController {
         viewAdminMenu();
         String option = scanner.nextLine();
 
-        while (option != "0") {
+        while (!option.equals("0")) {
 
             switch (option) {
                 case "1":
                     //ToDo menu de rooms
                     RoomController.roomMenu(scanner);
+                    adminMenu(scanner);
                     break;
                 case "2":
                     //ToDo menu de guest

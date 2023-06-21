@@ -9,7 +9,7 @@ public class RoomController {
      * Displays the room menu options.
      */
     public static void viewRoomMenu(){
-        System.out.println("*-*-*-*-*-*-*-***Bates Motel****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-***UTN Motel****-*-*-*-*-*-*");
         System.out.println("*-*-*-*-*-*-*-***Menu Reserva****-*-*-*-*-*");
         System.out.println("1. Ver habitaciones disponibles");
         System.out.println("2. Ver habitaciones ocupadas");
@@ -20,10 +20,14 @@ public class RoomController {
     }
 
     public static void roomMenu(Scanner scanner){
-        boolean flag = true;
-        do {
+
+        String option = "";
+
+        while (!option.equals("0")) {
+
             viewRoomMenu();
-            String option = scanner.nextLine();
+            option = scanner.nextLine();
+
             switch (option) {
                 case "1":
                     // ToDo falta implementacion
@@ -41,12 +45,12 @@ public class RoomController {
                     // ToDo falta implementacion
                     break;
                 case "0":
-                    EmployeeController.employeeMenu(scanner);
                     break;
                 default:
                     System.out.println("Ingreso incorrectamente.");
             }
-        }while(flag);
+        }
+
     }
     //endregion
 }

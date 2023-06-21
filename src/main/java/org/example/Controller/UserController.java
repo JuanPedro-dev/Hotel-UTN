@@ -212,10 +212,12 @@ public class UserController {
      * @param scanner
      */
     public static void UserMenu(Scanner scanner) {
-        boolean flag = true;
-        do {
+        String option = "";
+
+        while (!option.equals("0")) {
             viewUsersMenu();
-            String option = scanner.nextLine();
+            option = scanner.nextLine();
+
             switch (option) {
                 case "1":
                     listOfAllUsers().forEach(System.out::println);
@@ -235,7 +237,7 @@ public class UserController {
                 default:
                     System.out.println("Incorrect Input.");
             }
-        } while (flag);
+        }
     }
 
     //endregion

@@ -123,7 +123,7 @@ public class EmployeeController {
     }
 
     public static void viewEmployeeMenu(){
-        System.out.println("*-*-*-*-*-*-*-***Bates Motel****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-***UTN Motel****-*-*-*-*-*-*");
         System.out.println("*-*-*-*-*-*-*-***Menu Empleado****-*-*-*-*-*");
         System.out.println("1. Reserva");
         System.out.println("2. Huesped");
@@ -132,14 +132,18 @@ public class EmployeeController {
     }
 
     public static void employeeMenu(Scanner scanner){
-        boolean flag = true;
-        do {
+        String option = "";
+
+        while(!option.equals("0")) {
+
             viewEmployeeMenu();
-            String option = scanner.nextLine();
+            option = scanner.nextLine();
+
             switch (option) {
                 case "1":
                     // ToDo llamar al menu de reservas
                     BookingController.bookingMenu(scanner);
+                    employeeMenu(scanner);
                     break;
                 case "2":
                     // ToDo llamar al menu de huespedes
@@ -150,11 +154,10 @@ public class EmployeeController {
                     RoomController.roomMenu(scanner);
                     break;
                 case "0":
-                    HotelController.login();
                     break;
                 default:
-                    System.out.println("Ingreso incorrectamente.");
+                    System.out.println("Opción incorrecta.");
             }
-        }while(flag);
+        }
     }
 }

@@ -16,12 +16,13 @@ public class HotelController {
         User userFound;
         boolean flag = true;
 
-        System.out.println("*-*-*-*-*-*-*-***UTN Hotel***-*-*-*-*-*-*");
+        System.out.println("\n*-*-*-*-*-*-*-***UTN Hotel***-*-*-*-*-*-*");
         System.out.println("*-*-*-*-*-*-*-***LOGIN***-*-*-*-*-*-*");
 
-        while(option != "0") {
+        while(!option.equals("0")) {
             System.out.println("1. Login ");
             System.out.println("0. Exit");
+            System.out.print("Opción: ");
             option = scanner.nextLine();
 
             switch (option) {
@@ -34,13 +35,16 @@ public class HotelController {
                         password = scanner.nextLine();
 
                         userFound = UserController.isValidUser(username, password);
+
                         if (userFound != null) {
                             if (userFound instanceof Admin) AdminController.adminMenu(scanner);
                             if (userFound instanceof Employee) EmployeeController.employeeMenu(scanner);
+                            login();
                         } else {
                             flag = messageError();
                             if (!flag) System.out.println("No se ha encontrado su usuario... \n");
                         }
+
                     }
                 case "0":
                     System.out.println("*-*-***Gracias por utilizar UTN Hotel***-*-*");

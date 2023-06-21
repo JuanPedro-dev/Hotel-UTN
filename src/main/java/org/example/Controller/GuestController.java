@@ -46,9 +46,13 @@ public class GuestController {
             Guest newGuest = new Guest();
             String controller = "N";
             System.out.println("*-*-*-*-*-*-*-***Crear Huesped****-*-*-*-*-*-*");
-            do {
-                System.out.println("Enter para continuar..");
-                scanner.nextLine();             //cleaned buffer
+
+        while (controller.equals("S")) {
+
+                //ToDo borrar comentarios si no es necesario el clear buffer
+//                System.out.println("Enter para continuar..");
+//                scanner.nextLine();             //cleaned buffer
+
                 System.out.println("INGRESE LOS DATOS");
                 System.out.println("Nombre: ");
                 newGuest.setName(scanner.nextLine());
@@ -61,13 +65,15 @@ public class GuestController {
                 newGuest.setEmail(scanner.nextLine());
                 System.out.println("Telefono: ");
                 newGuest.setPhoneNumber(scanner.nextLong());
-                scanner.nextLine();             //cleaned buffer
-                System.out.println("Enter para continuar..");
-                scanner.nextLine();             //cleaned buffer
+
+//                scanner.nextLine();             //cleaned buffer
+//                System.out.println("Enter para continuar..");
+//                scanner.nextLine();             //cleaned buffer
                 guestRepository.add(newGuest);
-                System.out.println("Desea cargar otro usuario? S/N");
+
+                System.out.print("Desea cargar otro usuario? S/N: ");
                 controller = scanner.nextLine().toUpperCase();
-            } while (controller.equals("S"));
+            }
     }
 
 
@@ -86,9 +92,11 @@ public class GuestController {
      * @param updateGuest the guest object containing the updated information
      */
     public void update(Guest updateGuest){
-        String flag;
+        String flag = "";
         String option;
-        do {
+
+        while (flag.equals("S")) {
+
             if (updateGuest != null) {
                 System.out.println("Seleccione atributo a cambiar");
                 System.out.println("1. Nombre");
@@ -118,12 +126,18 @@ public class GuestController {
                         updateGuest.setEmail(scanner.nextLine());
                         System.out.println("Modificación exitosa");
                         break;
+                    default:
+                        System.out.println("Opción incorrecta.");
+
                 }
             }
 
-            System.out.println("Quiere cambiar otro atributo? S/N");
+            System.out.print("Quiere cambiar otro atributo? S/N: ");
+
             flag = scanner.nextLine().toUpperCase();
-        } while (flag.equals("S"));
+
+        }
+
         guestRepository.update(updateGuest);
     }
 
@@ -151,7 +165,7 @@ public class GuestController {
      * Displays the guest menu options.
      */
     public static void viewGuestMenu(){
-        System.out.println("*-*-*-*-*-*-*-***Bates Motel****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-***UTN Motel****-*-*-*-*-*-*");
         System.out.println("*-*-*-*-*-*-*-***Menu Huesped****-*-*-*-*-*");
         System.out.println("1. Crear un Huesped");
         System.out.println("2. Listar Huespedes");
@@ -167,42 +181,44 @@ public class GuestController {
      */
     public static void guestMenu(Scanner scanner){
         int dni;
-        boolean flag = true;
+
         GuestController guestController = new GuestController();
-        do {
+
+        String option = "";
+
+        while(!option.equals("0")) {
             viewGuestMenu();
-            String option = scanner.nextLine();
-                switch (option) {
-                    case "1":
-                        //ToDo PROBADO
-                        guestController.add(scanner);
-                        break;
-                    case "2":
-                        //ToDo PROBADO
-                        guestController.list();
-                        break;
-                    case "3":
-                        //ToDo PROBADO
-                        System.out.println("Ingrese DNI del huesped");
-                        dni = scanner.nextInt();
-                        Guest updateGuest = guestController.getById(dni);
-                        if (updateGuest != null)
-                            guestController.update(updateGuest);
-                        break;
-                    case "4":
-                        //ToDo PROBADO
-                        System.out.println("Ingrese el DNI del huesped que desea eliminar");
-                        dni = scanner.nextInt();
-                        if (guestController.getById(dni) != null)
-                            guestController.delete(dni);
-                        break;
-                    case "0":
-                        EmployeeController.employeeMenu(scanner);
-                        break;
-                    default:
-                        System.out.println("Ingreso incorrectamente.");
-                }
-        }while(flag);
+            option = scanner.nextLine();
+            switch (option) {
+                case "1":
+                    //ToDo PROBADO
+                    guestController.add(scanner);
+                    break;
+                case "2":
+                    //ToDo PROBADO
+                    guestController.list();
+                    break;
+                case "3":
+                    //ToDo PROBADO
+                    System.out.println("Ingrese DNI del huesped");
+                    dni = scanner.nextInt();
+                    Guest updateGuest = guestController.getById(dni);
+                    if (updateGuest != null)
+                        guestController.update(updateGuest);
+                    break;
+                case "4":
+                    //ToDo PROBADO
+                    System.out.println("Ingrese el DNI del huesped que desea eliminar");
+                    dni = scanner.nextInt();
+                    if (guestController.getById(dni) != null)
+                        guestController.delete(dni);
+                    break;
+                case "0":
+                    break;
+                default:
+                    System.out.println("Ingreso incorrectamente.");
+            }
+        }
     }
     //endregion
 }
