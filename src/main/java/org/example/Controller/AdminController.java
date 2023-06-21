@@ -161,15 +161,12 @@ public class AdminController {
 
             switch (option) {
                 case "1":
-                    //ToDo menu de rooms
                     RoomController.roomMenu(scanner);
                     break;
                 case "2":
-                    //ToDo menu de guest
                     GuestController.guestMenu(scanner);
                     break;
                 case "3":
-                    //ToDo menu de booking
                     BookingController.bookingMenu(scanner);
                     break;
                 case "4":

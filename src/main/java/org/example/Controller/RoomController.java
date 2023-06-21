@@ -1,6 +1,9 @@
 package org.example.Controller;
 
+import org.example.entity.Admin;
 import org.example.entity.Room;
+import org.example.entity.enums.RoomType;
+import org.example.exceptions.RoomExceptions;
 import org.example.repository.RoomRepository;
 
 import java.util.List;
@@ -82,6 +85,145 @@ public class RoomController {
 
     }
 
+    /**
+     * Delete room.
+     */
+    public static void deleteRoom(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\n*-*-*-*-*-*-*-**** UTN Motel ****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-**** Borrar Habitación ****-*-*-*-*-*");
+        System.out.print("Ingrese el nro de habitación: ");
+        Integer roomID = scanner.nextInt();
+
+        RoomRepository roomRepository = new RoomRepository();
+
+        Room room = roomRepository.getById(roomID);
+
+        if (room == null) {
+            System.out.println("La habitación no existe. ");
+            return;
+        }
+
+        roomRepository.delete(roomID);
+
+        System.out.println("Habitación " + roomID + " eliminada.");
+    }
+
+
+
+    /**
+     * Updates the information of an Room object.
+     *
+     */
+    public static void updateRoom(){
+
+        Scanner scanner = new Scanner(System.in);
+        RoomRepository roomRepository = new RoomRepository();
+
+        String flag = "S";
+        String option;
+
+        System.out.println("\n*-*-*-*-*-*-*-**** UTN Motel ****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-**** Modificar Habitación ****-*-*-*-*-*");
+        System.out.print("Ingrese el nro de habitación: ");
+        String roomId = scanner.nextLine();
+
+        Room roomToUpdate = null;
+
+        try{
+            roomToUpdate = roomRepository.getById(Integer.valueOf(roomId));
+        } catch (NumberFormatException e){
+            System.out.println("Ingrese un número valido. Error: " + e);
+        }
+
+        if( roomToUpdate  == null ) {
+            System.out.println("La habitación '" + roomId + "' no existe.");
+            return;
+        }
+
+        while (flag.equals("S")) {
+
+            if (roomToUpdate != null) {
+
+                System.out.println("Seleccione atributo a cambiar");
+                System.out.println("1. Disponible");
+                System.out.println("2. Tipo de Habitación.");
+
+                option = scanner.nextLine();
+
+                switch (option) {
+                    case "1" -> {
+                        String optionDisponible = "";
+                        System.out.println("1. Disponible");
+                        System.out.println("2. Ocupado");
+                        optionDisponible = scanner.nextLine();
+
+                        if (optionDisponible.equals("1")) roomToUpdate.setAvailable(true);
+                        if (optionDisponible.equals("2")) roomToUpdate.setAvailable(false);
+                        if (!optionDisponible.equals("1") && !optionDisponible.equals("2")){
+                            System.out.println("Opción incorrecta.");
+                            break;
+                        }
+
+                        System.out.println("Modificación exitosa");
+                    }
+                    case "2" -> {
+                        roomToUpdate = changeTypeRoom( roomToUpdate );
+                        roomRepository.update(roomToUpdate);
+                    }
+                    default -> System.out.println("Opción incorrecta.");
+                }
+            }
+
+            System.out.print("Quiere cambiar otro atributo? S/N: ");
+            flag = scanner.nextLine().toUpperCase();
+
+        }
+        roomRepository.update(roomToUpdate);
+    }
+
+
+    public static Room changeTypeRoom(Room roomToUpdate) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Seleccione el tipo de habitación.");
+        System.out.println("1. Single");
+        System.out.println("2. Twin");
+        System.out.println("3. Matrimonial");
+        System.out.println("4. Triple");
+        System.out.println("5. Quad");
+
+        String option = scanner.nextLine();
+
+        switch (option){
+            case "1" -> {
+                roomToUpdate.setRoomType(RoomType.SINGLE);
+                System.out.println("Modificación exitosa");
+            }
+            case "2" -> {
+                roomToUpdate.setRoomType(RoomType.TWIN);
+                System.out.println("Modificación exitosa");
+            }
+            case "3" -> {
+                roomToUpdate.setRoomType(RoomType.MATRIMONIAL);
+                System.out.println("Modificación exitosa");
+            }
+            case "4" -> {
+                roomToUpdate.setRoomType(RoomType.TRIPLE);
+                System.out.println("Modificación exitosa");
+            }
+            case "5" -> {
+                roomToUpdate.setRoomType(RoomType.QUAD);
+                System.out.println("Modificación exitosa");
+            }
+            default -> System.out.println("Opción incorrecta.");
+        }
+
+        return roomToUpdate;
+    }
+
+
     public static void roomMenu(Scanner scanner){
 
         String option = "";
@@ -91,9 +233,6 @@ public class RoomController {
             viewRoomMenu();
             option = scanner.nextLine();
 
-
-
-            System.out.println("0. Salir");
             switch (option) {
                 case "1":
                     viewListRoomAvailable();
@@ -105,12 +244,11 @@ public class RoomController {
                     viewListRoom();
                     break;
                 case "4":
-                    System.out.println("4. Eliminar Habitacion");
-                    // ToDo falta implementacion
+                    deleteRoom();
                     break;
                 case "5":
-                    System.out.println("5. Modificar Habitacion");
-                    // ToDo falta implementacion
+                    String roomId = "";
+                    updateRoom();
                     break;
                 case "0":
                     break;
