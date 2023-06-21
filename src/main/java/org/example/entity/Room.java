@@ -44,11 +44,11 @@ public class Room {
 
     @Override
     public String toString() {
-        return  "**********************************"+
-                "\t [Habitación N°" + roomNumber +"] \n"+
-                "Datos de la habitacion: \n" +
-                "Disponibilidad: [" + isAvailable +"]\n"+
-                "Tipo: [" + roomType + "]";
+        return
+                "\n***** [Habitación N°" + roomNumber +"] ***** \n"+
+                "Datos:\n" +
+                "\tDisponibilidad: [" + isAvailable +"]\n"+
+                "\tTipo: [" + roomType + "]";
     }
 
 }

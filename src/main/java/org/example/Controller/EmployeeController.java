@@ -14,7 +14,6 @@ public class EmployeeController {
     public EmployeeController() {
     }
 
-
     /**
      * Lists all the employees in the employees repository and prints them to the console.
      */
@@ -30,7 +29,6 @@ public class EmployeeController {
 
     /**
      * Adds a new employee to the employee repository.
-     *
      * @param newEmployee The employee object to be added.
      */
     public void add(Employee newEmployee) {employeeRepository.add(newEmployee);}
@@ -56,7 +54,7 @@ public class EmployeeController {
         do {
 
             if (updateEmployee != null) {
-                System.out.println("Seleccione atributo a cambiar");
+                System.out.println("\nSeleccione atributo a cambiar");
                 System.out.println("1. Nombre");
                 System.out.println("2. Apellido");
                 System.out.println("3. Teléfono");
@@ -69,32 +67,32 @@ public class EmployeeController {
 
                 switch (option) {
                     case "1" -> {
-                        System.out.println("Ingrese nuevo nombre");
+                        System.out.print("Ingrese nuevo nombre: ");
                         updateEmployee.setName(scanner.nextLine());
                         System.out.println("Modificación exitosa");
                     }
                     case "2" -> {
-                        System.out.println("Ingrese nuevo apellido");
+                        System.out.print("Ingrese nuevo apellido= ");
                         updateEmployee.setLastName(scanner.nextLine());
                         System.out.println("Modificación exitosa");
                     }
                     case "3" -> {
-                        System.out.println("Ingrese nuevo teléfono");
-                        updateEmployee.setPhoneNumber(scanner.nextInt());
+                        System.out.print("Ingrese nuevo teléfono= ");
+                        updateEmployee.setPhoneNumber(Long.parseLong(scanner.nextLine()));
                         System.out.println("Modificación exitosa");
                     }
                     case "4" -> {
-                        System.out.println("Ingrese nuevo email");
+                        System.out.print("Ingrese nuevo email= ");
                         updateEmployee.setEmail(scanner.nextLine());
                         System.out.println("Modificación exitosa");
                     }
                     case "5" -> {
-                        System.out.println("Ingrese nuevo user");
+                        System.out.print("Ingrese nuevo user= ");
                         updateEmployee.setUser(scanner.nextLine());
                         System.out.println("Modificación exitosa");
                     }
                     case "6" -> {
-                        System.out.println("Ingrese nuevo password");
+                        System.out.print("Ingrese nuevo password= ");
                         updateEmployee.setPassword(scanner.nextLine());
                         System.out.println("Modificación exitosa");
                     }
@@ -146,22 +144,11 @@ public class EmployeeController {
             option = scanner.nextLine();
 
             switch (option) {
-                case "1":
-                    // ToDo llamar al menu de reservas
-                    BookingController.bookingMenu(scanner);
-                    break;
-                case "2":
-                    // ToDo llamar al menu de huespedes
-                    GuestController.guestMenu(scanner);
-                    break;
-                case "3":
-                    // ToDo llamar al menu de habitaciones
-                    RoomController.roomMenu(scanner);
-                    break;
-                case "0":
-                    break;
-                default:
-                    System.out.println("Opción incorrecta.");
+                case "1" -> BookingController.bookingMenu(scanner);
+                case "2" -> GuestController.guestMenu();
+                case "3" -> RoomController.roomMenu(scanner);
+                case "0" -> option = "0";
+                default  -> System.out.println("Opción incorrecta.");
             }
         }
     }

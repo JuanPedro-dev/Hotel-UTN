@@ -8,11 +8,8 @@ import java.util.UUID;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-
 public class Booking {
 //region [Atributos]
-
-
     private String bookingId ; // id unico de 12 caracteres
     private Guest bookingPassenger;
     private Room bookedRoom;
@@ -43,57 +40,57 @@ public class Booking {
 //region [Getters & Setters]
 
 
-public BookingState getBookingState() {
-    return bookingState;
-}
+    public BookingState getBookingState() {
+        return bookingState;
+    }
 
-public void setBookingState(BookingState bookingState) {
-    this.bookingState = bookingState;
-}
+    public void setBookingState(BookingState bookingState) {
+        this.bookingState = bookingState;
+    }
 
-public String getBookingId() {
-    return bookingId;
-}
+    public String getBookingId() {
+        return bookingId;
+    }
 
-public Guest getBookingPassenger() {
-    return bookingPassenger;
-}
+    public Guest getBookingPassenger() {
+        return bookingPassenger;
+    }
 
-public void setBookingPassenger(Guest bookingPassenger) {
-    this.bookingPassenger = bookingPassenger;
-}
+    public void setBookingPassenger(Guest bookingPassenger) {
+        this.bookingPassenger = bookingPassenger;
+    }
 
-public Room getBookedRoom() {
-    return bookedRoom;
-}
+    public Room getBookedRoom() {
+        return bookedRoom;
+    }
 
-public void setBookedRoom(Room bookedRoom) {
-    this.bookedRoom = bookedRoom;
-}
+    public void setBookedRoom(Room bookedRoom) {
+        this.bookedRoom = bookedRoom;
+    }
 
-public LocalDate getCheckInDate() {
-    return checkInDate;
-}
+    public LocalDate getCheckInDate() {
+        return checkInDate;
+    }
 
-public void setCheckInDate(LocalDate checkInDate) {
-    this.checkInDate = checkInDate;
-}
+    public void setCheckInDate(LocalDate checkInDate) {
+        this.checkInDate = checkInDate;
+    }
 
-public LocalDate getCheckOutDate() {
-    return checkOutDate;
-}
+    public LocalDate getCheckOutDate() {
+        return checkOutDate;
+    }
 
-public void setCheckOutDate(LocalDate checkOutDate) {
-    this.checkOutDate = checkOutDate;
-}
+    public void setCheckOutDate(LocalDate checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
 
-public double getSpentMoney() {
-    return spentMoney;
-}
+    public double getSpentMoney() {
+        return spentMoney;
+    }
 
-public void setSpentMoney(double spentMoney) {
-    this.spentMoney = spentMoney;
-}
+    public void setSpentMoney(double spentMoney) {
+        this.spentMoney = spentMoney;
+    }
 //endregion
 
 //region [Métodos]

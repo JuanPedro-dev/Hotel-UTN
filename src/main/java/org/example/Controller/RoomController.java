@@ -1,9 +1,7 @@
 package org.example.Controller;
 
-import org.example.entity.Admin;
 import org.example.entity.Room;
 import org.example.entity.enums.RoomType;
-import org.example.exceptions.RoomExceptions;
 import org.example.repository.RoomRepository;
 
 import java.util.List;
@@ -110,8 +108,6 @@ public class RoomController {
         System.out.println("Habitación " + roomID + " eliminada.");
     }
 
-
-
     /**
      * Updates the information of an Room object.
      *
@@ -149,6 +145,7 @@ public class RoomController {
                 System.out.println("Seleccione atributo a cambiar");
                 System.out.println("1. Disponible");
                 System.out.println("2. Tipo de Habitación.");
+                System.out.print("Opción: ");
 
                 option = scanner.nextLine();
 
@@ -157,6 +154,8 @@ public class RoomController {
                         String optionDisponible = "";
                         System.out.println("1. Disponible");
                         System.out.println("2. Ocupado");
+                        System.out.print("Opción: ");
+
                         optionDisponible = scanner.nextLine();
 
                         if (optionDisponible.equals("1")) roomToUpdate.setAvailable(true);
@@ -165,7 +164,6 @@ public class RoomController {
                             System.out.println("Opción incorrecta.");
                             break;
                         }
-
                         System.out.println("Modificación exitosa");
                     }
                     case "2" -> {
@@ -183,7 +181,6 @@ public class RoomController {
         roomRepository.update(roomToUpdate);
     }
 
-
     public static Room changeTypeRoom(Room roomToUpdate) {
         Scanner scanner = new Scanner(System.in);
 
@@ -193,6 +190,7 @@ public class RoomController {
         System.out.println("3. Matrimonial");
         System.out.println("4. Triple");
         System.out.println("5. Quad");
+        System.out.print("Opción: ");
 
         String option = scanner.nextLine();
 
@@ -219,12 +217,10 @@ public class RoomController {
             }
             default -> System.out.println("Opción incorrecta.");
         }
-
         return roomToUpdate;
     }
 
-
-    public static void roomMenu(Scanner scanner){
+    public static void roomMenu(Scanner scanner) {
 
         String option = "";
 
@@ -234,31 +230,16 @@ public class RoomController {
             option = scanner.nextLine();
 
             switch (option) {
-                case "1":
-                    viewListRoomAvailable();
-                    break;
-                case "2":
-                    viewListRoomNotAvailable();
-                    break;
-                case "3":
-                    viewListRoom();
-                    break;
-                case "4":
-                    deleteRoom();
-                    break;
-                case "5":
-                    String roomId = "";
-                    updateRoom();
-                    break;
-                case "0":
-                    break;
-                default:
-                    System.out.println("Opción incorrecta.");
+                case "0" -> option = "0";
+                case "1" -> viewListRoomAvailable();
+                case "2" -> viewListRoomNotAvailable();
+                case "3" -> viewListRoom();
+                case "4" -> deleteRoom();
+                case "5" -> updateRoom();
+                default -> System.out.println("Opción incorrecta.");
             }
         }
-
     }
-
 
 
 }

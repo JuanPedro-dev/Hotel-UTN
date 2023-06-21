@@ -46,6 +46,11 @@
   },
   {
     "isAvailable": true,
+    "roomNumber": 205,
+    "roomType": "TWIN"
+  },
+  {
+    "isAvailable": true,
     "roomNumber": 301,
     "roomType": "TRIPLE"
   },
@@ -62,6 +67,11 @@
   {
     "isAvailable": false,
     "roomNumber": 304,
+    "roomType": "SINGLE"
+  },
+  {
+    "isAvailable": false,
+    "roomNumber": 305,
     "roomType": "TWIN"
   }
 ]

@@ -7,9 +7,7 @@ import org.example.entity.User;
 import java.util.Scanner;
 
 public class HotelController {
-
     private static final Scanner scanner = new Scanner(System.in);
-
 
     public static void login(){
 

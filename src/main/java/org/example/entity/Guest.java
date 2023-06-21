@@ -6,7 +6,7 @@ public class Guest extends User {
     public Guest() {
     }
 
-    public Guest(String name, String lastName, int dni, String email, long phoneNumber) {
+    public Guest(String name, String lastName, Integer dni, String email, Long phoneNumber) {
         super(name, lastName, dni, email, phoneNumber);
     }
     //endregion
@@ -15,7 +15,10 @@ public class Guest extends User {
 
     @Override
     public String toString() {
-        return "Guest" + super.toString();
+        return
+                "\n***** Huesped ***** \n"+
+                "Datos:" +
+                        super.toString();
     }
 
     //endregion

@@ -37,7 +37,6 @@ public class AdminController {
 
     /**
      * Adds a new admin to the admin repository.
-     *
      * @param newAdmin The admin object to be added.
      */
     public void add(Admin newAdmin) {
@@ -47,7 +46,6 @@ public class AdminController {
 
     /**
      * Deletes an admin from the admin repository based on the provided DNI (Document Number Identifier).
-     *
      * @param dni The DNI of the admin to delete.
      */
     public void delete(Integer dni){
@@ -56,7 +54,6 @@ public class AdminController {
 
     /**
      * Updates the information of an Admin object.
-     *
      * @param updateAdmin The Admin object to be updated.
      */
     public void update(Admin updateAdmin){
@@ -88,7 +85,7 @@ public class AdminController {
                     }
                     case "3" -> {
                         System.out.println("Ingrese nuevo teléfono");
-                        updateAdmin.setPhoneNumber(scanner.nextInt());
+                        updateAdmin.setPhoneNumber(Long.parseLong(scanner.nextLine()));
                         System.out.println("Modificación exitosa");
                     }
                     case "4" -> {
@@ -160,22 +157,12 @@ public class AdminController {
             option = scanner.nextLine();
 
             switch (option) {
-                case "1":
-                    RoomController.roomMenu(scanner);
-                    break;
-                case "2":
-                    GuestController.guestMenu(scanner);
-                    break;
-                case "3":
-                    BookingController.bookingMenu(scanner);
-                    break;
-                case "4":
-                    UserController.UserMenu(scanner);
-                    break;
-                case "0":
-                    break;
-                default:
-                    System.out.println("Opción incorrecta.");
+                case "1" -> RoomController.roomMenu(scanner);
+                case "2" -> GuestController.guestMenu();
+                case "3" -> BookingController.bookingMenu(scanner);
+                case "4" -> UserController.userMenu();
+                case "0" -> option = "0";
+                default ->System.out.println("Opción incorrecta.");
             }
         }
     }

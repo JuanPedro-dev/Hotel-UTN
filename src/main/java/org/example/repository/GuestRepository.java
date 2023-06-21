@@ -7,6 +7,7 @@ import org.example.util.SerializerGson;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GuestRepository implements IRepository<Guest, Integer> {
     private final File file = new File("src/main/java/org/example/file/GuestFile.json");
@@ -29,14 +30,15 @@ public class GuestRepository implements IRepository<Guest, Integer> {
     }
 
     @Override
-    public void add(Guest obj) {
-        Guest toAdd = getById(obj.getDni());
+    public void add( Guest obj ) {
+
+        Guest toAdd = getById( obj.getDni() );
 
         if (toAdd == null) {
-            this.guests.add(obj);
+            this.guests.add( obj );
             saveToFile();
         } else {
-            throw new GuestExceptions("El Huesped ya existe!");
+            System.out.println("El Huesped ya existe!");
         }
     }
 
@@ -49,7 +51,7 @@ public class GuestRepository implements IRepository<Guest, Integer> {
     public Guest getById(Integer dni) {
 
         for (Guest guest : this.guests) {
-            if (guest.getDni().equals(dni)) return guest;
+            if (Objects.equals(guest.getDni(), dni)) return guest;
         }
 
         return null;
@@ -58,7 +60,7 @@ public class GuestRepository implements IRepository<Guest, Integer> {
     @Override
     public void update(Guest obj) {
 
-        Guest toUpdate = getById(obj.getDni());
+        Guest toUpdate = getById( obj.getDni() );
 
         if (toUpdate == null) {
             throw new GuestExceptions("El huesped no Existe!");
@@ -70,7 +72,6 @@ public class GuestRepository implements IRepository<Guest, Integer> {
                 }
             }
         }
-
         saveToFile();
     }
 

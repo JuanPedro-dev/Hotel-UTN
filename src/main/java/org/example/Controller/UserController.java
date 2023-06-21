@@ -15,45 +15,57 @@ public class UserController {
 
     /**
      * This method allows the user to add a new user to the system.
-     *
-     *The user can be either an Employee or an Admin, depending on the type selected.
-     * @param scanner the Scanner object used for user input
+     * The user can be either an Employee or an Admin, depending on the type selected.
      */
-    //ToDo PROBADO
-    public static void addUser(Scanner scanner){
+    public static void addUser(){
+        Scanner scanner = new Scanner(System.in);
+        Scanner scannerInteger = new Scanner(System.in);
+        Scanner scannerLong = new Scanner(System.in);
+
         Employee employee;
         Admin admin;
         int type;
-        String controller = "N";
+
+        String controller = "S";
         String name, lastName, email, user, password;
         Integer dni;
-        long phone;
-        System.out.println("\n*-*-*-*-*-*-*-**** Crear Usuario ****-*-*-*-*-*-*");
-        do {
-            System.out.println("Enter para continuar..");
-            scanner.nextLine();             //cleaned buffer
+        Long phone;
+
+        while (controller.equals("S")) {
+            System.out.println("\n*-*-*-*-*-*-*-**** Crear Usuario ****-*-*-*-*-*-*");
             System.out.println("INGRESE LOS DATOS");
-            System.out.println("Nombre: ");
+            System.out.println("Seleccione el puesto");
+            System.out.println("1. Empleado general.");
+            System.out.println("2. Administrador.");
+            System.out.print("Opción: ");
+            // ToDo verificar exceptions aca
+            type = scannerInteger.nextInt();
+
+            System.out.print("Nombre: ");
             name = scanner.nextLine();
-            System.out.println("Apellido: ");
+
+            System.out.print("Apellido: ");
             lastName = scanner.nextLine();
-            System.out.println("DNI: ");
-            dni = scanner.nextInt();
-            scanner.nextLine();
-            System.out.println("Email: ");
+
+            System.out.print("DNI: ");
+            dni = scannerInteger.nextInt();
+
+            System.out.print("Email: ");
             email = scanner.nextLine();
-            System.out.println("Telefono: ");
-            phone = scanner.nextLong();
-            scanner.nextLine();             //cleaned buffer
-            System.out.println("Usuario");
+
+            System.out.print("Teléfono: ");
+            // ToDo verificar exceptions aca
+            phone = scannerLong.nextLong();
+
+            System.out.print("Usuario: ");
             user = scanner.nextLine();
-            System.out.println("Password");
+
+            System.out.print("Password : ");
             password = scanner.nextLine();
-            System.out.println("Ingrese 1.Empleado o 2.Admin, según permisos que tendrá");
-            type = scanner.nextInt();
+
 
             if(type==1) {
-                employee = new Employee(name, lastName, dni,user,password, email, phone);
+                employee = new Employee(name, lastName, dni, user , password, email, phone);
                 EmployeeController employeeController = new EmployeeController();
                 employeeController.add(employee);
             }
@@ -62,47 +74,46 @@ public class UserController {
                 AdminController adminController = new AdminController();
                 adminController.add(admin);
             }
-            System.out.println("Enter para continuar..");
-            scanner.nextLine();             //cleaned buffer
+
             System.out.println("Desea cargar otro usuario? S/N");
             controller = scanner.nextLine().toUpperCase();
-        } while (controller.equals("S"));
+        }
     }
 
 
     /**
      * Searches for a user based on user type and user ID.
-     *
-     * @param scanner The Scanner object for user input.
      */
-    //ToDo PROBADO -> bug en el menu
-    public static void updateUser(Scanner scanner){
+    public static void updateUser(){
+        Scanner scanner = new Scanner(System.in);
+
         int dni;
-        System.out.println("*-*-*-*-*-*-*-**** Modificar Usuario ****-*-*-*-*-*-*");
-        System.out.println("Enter para continuar..");
-        scanner.nextLine();             //cleaned buffer
-        System.out.println("Ingrese el tipo de usuario que desea modificar: \n");
-        System.out.println(" 1. Admin \n 2. Employee");
+
+        System.out.println("\n*-*-*-*-*-*-*-**** Modificar Usuario ****-*-*-*-*-*-*");
+        System.out.println("Seleccione el puesto");
+        System.out.println("1. Empleado general.");
+        System.out.println("2. Administrador.");
         System.out.print("Opción: ");
         int userType = scanner.nextInt();
-        scanner.nextLine();             //cleaned buffer
 
-        switch (userType) {
+        switch ( userType ) {
             case 1:
+                EmployeeController employeeController = new EmployeeController();
+                System.out.print("Ingrese DNI del employee: ");
+                dni = scanner.nextInt();
+                Employee updateEmployee = employeeController.getById(dni);
+
+                if (updateEmployee != null)
+                    employeeController.update(updateEmployee);
+
+                break;
+            case 2:
                 AdminController adminController = new AdminController();
-                System.out.println("Ingrese DNI del admin");
+                System.out.print("Ingrese DNI del admin: ");
                 dni = scanner.nextInt();
                 Admin updateAdmin = adminController.getById(dni);
                 if (updateAdmin != null)
                     adminController.update(updateAdmin);
-                break;
-            case 2:
-                EmployeeController employeeController = new EmployeeController();
-                System.out.println("Ingrese DNI del employee");
-                dni = scanner.nextInt();
-                Employee updateEmployee = employeeController.getById(dni);
-                if (updateEmployee != null)
-                    employeeController.update(updateEmployee);
                 break;
             default:
                 System.out.println("Opción incorrecta.");
@@ -114,37 +125,37 @@ public class UserController {
      * The user is prompted to select the type of user to delete (Admin, Employee, or Guest).
      * The user is then prompted to enter the dni of the user to be deleted.
      * If the user is found, it is deleted.
-     * @param scanner The Scanner object used for user input.
      */
-    //ToDo PROBADO -> bug en el menu
-    public static void deleteUser(Scanner scanner){
-        //ToDo PROBADO -> BORRA OK
-        //ToDo Falta implementar Guest y Employee
-        int dni;
-        System.out.println("*-*-*-*-*-*-*-**** Borrar Usuario ****-*-*-*-*-*-*");
-        System.out.println("Presione Enter para continuar..");
-        scanner.nextLine(); // Limpiar el búfer
+    public static void deleteUser(){
 
-        System.out.println("Ingrese el tipo de usuario que desea borrar:");
-        System.out.println("1. Admin");
-        System.out.println("2. Employee");
+        Scanner scanner = new Scanner(System.in);
+
+        int dni;
+
+        System.out.println("*-*-*-*-*-*-*-**** Borrar Usuario ****-*-*-*-*-*-*");
+        System.out.println("Seleccione el puesto");
+        System.out.println("1. Empleado general.");
+        System.out.println("2. Administrador.");
+        System.out.println("Opción: ");
+
         int userType = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el búfer
+
 
         switch (userType) {
             case 1:
-                AdminController adminController = new AdminController();
-                System.out.println("Ingrese el DNI que desea eliminar");
-                dni = scanner.nextInt();
-                if (adminController.getById(dni) != null)
-                    adminController.delete(dni);
-                break;
-            case 2:
                 EmployeeController employeeController = new EmployeeController();
-                System.out.println("Ingrese el DNI que desea eliminar");
+                System.out.print("Ingrese el DNI que desea eliminar: ");
                 dni = scanner.nextInt();
                 if(employeeController.getById(dni) != null)
                     employeeController.delete(dni);
+                break;
+            case 2:
+
+                AdminController adminController = new AdminController();
+                System.out.print("Ingrese el DNI que desea eliminar: ");
+                dni = scanner.nextInt();
+                if (adminController.getById(dni) != null)
+                    adminController.delete(dni);
                 break;
             default:
                 System.out.println("Opción incorrecta.");
@@ -156,10 +167,8 @@ public class UserController {
     //region [Utilities]
     /**
      * Retrieves a list of all users, including admins and employees.
-     *
      * @return An ArrayList containing all users.
      */
-    //ToDo PROBADO
     public static ArrayList<User> listOfAllUsers(){
         ArrayList<User> users = new ArrayList<>();
 
@@ -209,9 +218,9 @@ public class UserController {
 
     /**
      * Controller method for the admin menu
-     * @param scanner
      */
-    public static void UserMenu(Scanner scanner) {
+    public static void userMenu() {
+        Scanner scanner = new Scanner(System.in);
 
         String option = "";
 
@@ -221,23 +230,12 @@ public class UserController {
             option = scanner.nextLine();
 
             switch (option) {
-                case "1":
-                    listOfAllUsers().forEach(System.out::println);
-                    break;
-                case "2":
-                    addUser(scanner);
-                    break;
-                case "3":
-                    updateUser(scanner);
-                    break;
-                case "4":
-                    deleteUser(scanner);
-                    break;
-                case "0":
-                    AdminController.adminMenu(scanner);
-                    break;
-                default:
-                    System.out.println("Opción incorrecta.");
+                case "1" -> listOfAllUsers().forEach(System.out::println);
+                case "2" -> addUser();
+                case "3" -> updateUser();
+                case "4" -> deleteUser();
+                case "0" -> AdminController.adminMenu(scanner);
+                default -> System.out.println("Opción incorrecta.");
             }
         }
     }

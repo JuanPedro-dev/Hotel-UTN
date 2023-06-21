@@ -5,15 +5,13 @@ import java.util.Objects;
 public abstract class  User {
 
     //region [Attributes]
-
-    //ToDo ver si agregamos ID
     private String name;
     private String lastName;
     private Integer dni;
     private String user;
     private String password;
     private String email;
-    private long phoneNumber;
+    private Long phoneNumber;
     //endregion
 
     //region [Constructors]
@@ -21,7 +19,7 @@ public abstract class  User {
     public User() {
     }
 
-    public User(String name, String lastName, Integer dni, String user, String password, String email, long phoneNumber) {
+    public User(String name, String lastName, Integer dni, String user, String password, String email, Long phoneNumber) {
         this.name = name;
         this.lastName = lastName;
         this.dni = dni;
@@ -31,7 +29,7 @@ public abstract class  User {
         this.phoneNumber = phoneNumber;
     }
 
-    public User(String name, String lastName, Integer dni, String email, long phoneNumber) {
+    public User(String name, String lastName, Integer dni, String email, Long phoneNumber) {
         this.name = name;
         this.lastName = lastName;
         this.dni = dni;
@@ -39,8 +37,6 @@ public abstract class  User {
         this.phoneNumber = phoneNumber;
     }
     //endregion
-
-    //region [Getters and Setters]
 
     public String getName() {
         return name;
@@ -90,16 +86,14 @@ public abstract class  User {
         this.email = email;
     }
 
-    public long getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-
-    //endregion
 
     //region [Overrides]
 
@@ -118,15 +112,15 @@ public abstract class  User {
 
     @Override
     public String toString() {
-        return "{" +
-                "name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dni=" + dni +
-                ", user='" + user + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                '}';
+        return
+                "\n\tNombre= " + name +
+                "\n\tApellido= " + lastName +
+                "\n\tDNI= " + dni +
+                "\n\tUser= " + user +
+                "\n\tpassword= " + password +
+                "\n\temail= " + email +
+                "\n\tTeléfono= " + phoneNumber;
+
     }
 //endregion
 }

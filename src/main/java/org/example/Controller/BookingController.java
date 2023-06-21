@@ -15,7 +15,7 @@ public class BookingController {
         System.out.println("1. Check in");
         System.out.println("2. Check out");
         System.out.println("3. Ver todas las reservas");
-        System.out.println("3. Servicio al cuarto");
+        System.out.println("4. Servicio al cuarto");
         System.out.println("0. Salir");
         System.out.print("Opción: ");
     }
@@ -30,22 +30,12 @@ public class BookingController {
             option = scanner.nextLine();
 
             switch (option) {
-                case "1":
-                    // ToDo falta implementacion
-                    break;
-                case "2":
-                    // ToDo falta implementacion
-                    break;
-                case "3":
-                    // ToDo falta implementacion
-                    break;
-                case "4":
-                    // ToDo falta implementacion
-                    break;
-                case "0":
-                    break;
-                default:
-                    System.out.println("Opción incorrecta.");
+                case "1" -> System.out.println("1. Check in");
+                case "2" -> System.out.println("2. Check out");
+                case "3" -> System.out.println("3. Ver todas las reservas");
+                case "4" -> System.out.println("4. Servicio al cuarto");
+                case "0" -> option = "0";
+                default -> System.out.println("Opción incorrecta.");
             }
         }
     }

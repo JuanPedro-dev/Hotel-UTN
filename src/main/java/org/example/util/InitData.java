@@ -19,7 +19,6 @@ public class InitData {public static void main(String[] args) {
     initUser();
     initEmployee();
     initGuest();
-    // TODO repetir con los otros, crear un initClase NO Olvidar poner bien la ruta del archivo
 }
 
     public static void initRoom(){
@@ -58,7 +57,7 @@ public class InitData {public static void main(String[] args) {
         File adminFile = new File("src/main/java/org/example/file/AdminFile.json");
 
         List<Admin> admins = new ArrayList<>(Arrays.asList(
-                new Admin("Administrador", "Administrador", 99, "admin", "admin", "Administrador@gmail.com", 123456789)
+                new Admin("Administrador", "Administrador", 99, "admin", "admin", "Administrador@gmail.com", 123456789L)
         ));
 
         serializerGson.serializer(admins, adminFile.getPath());
@@ -70,7 +69,7 @@ public class InitData {public static void main(String[] args) {
         File employeeFile = new File("src/main/java/org/example/file/EmployeeFile.json");
 
         List<Employee> employees = new ArrayList<>(Arrays.asList(
-                new Employee("Empleado", "Empleado",123456789, "empleado", "empleado", "Empleado@gmail.com",123456789)
+                new Employee("Empleado", "Empleado",123456789, "empleado", "empleado", "Empleado@gmail.com",123456789L)
         ));
 
         serializerGson.serializer(employees, employeeFile.getPath());
@@ -82,7 +81,7 @@ public class InitData {public static void main(String[] args) {
         File guestFile = new File("src/main/java/org/example/file/GuestFile.json");
 
         List<Guest> guests = new ArrayList<>(Arrays.asList(
-                new Guest("Huesped", "Huesped", 123456789, "Huesped@gmail.com",123456789)
+                new Guest("Huesped", "Huesped", 123456789, "Huesped@gmail.com",123456789L)
         ));
 
         serializerGson.serializer(guests, guestFile.getPath());
