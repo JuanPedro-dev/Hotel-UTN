@@ -1,12 +1,11 @@
 package org.example.util;
 
-import org.example.entity.Admin;
-import org.example.entity.Employee;
-import org.example.entity.Guest;
-import org.example.entity.Room;
+import org.example.entity.*;
+import org.example.entity.enums.BookingState;
 import org.example.entity.enums.RoomType;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +18,7 @@ public class InitData {public static void main(String[] args) {
     initUser();
     initEmployee();
     initGuest();
+    initBooking();
 }
 
     public static void initRoom(){
@@ -87,6 +87,24 @@ public class InitData {public static void main(String[] args) {
         serializerGson.serializer(guests, guestFile.getPath());
     }
 
+    public static void initBooking(){
+    // ToDo 
+//        SerializerGson serializerGson = new SerializerGson<>();
+//
+//        File bookingFile = new File("src/main/java/org/example/file/BookingFile.json");
+//
+//        List<Booking> bookings = new ArrayList<>(Arrays.asList(
+//                new Booking(
+//                        new Guest("Huesped", "Huesped", 123456789, "Huesped@gmail.com",123456789L),
+//                        new Room(true,101, RoomType.TRIPLE),
+//                        LocalDate.now(),
+//                        LocalDate.now(),
+//                        BookingState.FINALIZED
+//                )
+//        ));
+//
+//        serializerGson.serializer(bookings, bookingFile.getPath());
+    }
 
 
 }

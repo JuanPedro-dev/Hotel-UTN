@@ -2,7 +2,6 @@ package org.example.Controller;
 
 import org.example.entity.Admin;
 import org.example.entity.Employee;
-import org.example.entity.Guest;
 import org.example.entity.User;
 
 import java.util.ArrayList;
@@ -19,27 +18,33 @@ public class UserController {
      */
     public static void addUser(){
         Scanner scanner = new Scanner(System.in);
-        Scanner scannerInteger = new Scanner(System.in);
-        Scanner scannerLong = new Scanner(System.in);
 
         Employee employee;
         Admin admin;
-        int type;
+        int type = 0;
 
         String controller = "S";
         String name, lastName, email, user, password;
         Integer dni;
-        Long phone;
+        long phone;
 
         while (controller.equals("S")) {
-            System.out.println("\n*-*-*-*-*-*-*-**** Crear Usuario ****-*-*-*-*-*-*");
-            System.out.println("INGRESE LOS DATOS");
-            System.out.println("Seleccione el puesto");
-            System.out.println("1. Empleado general.");
-            System.out.println("2. Administrador.");
-            System.out.print("Opción: ");
-            // ToDo verificar exceptions aca
-            type = scannerInteger.nextInt();
+
+            while(!(type == 1 || type == 2)){
+                try{
+                    System.out.println("\n*-*-*-*-*-*-*-**** Crear Usuario ****-*-*-*-*-*-*");
+                    System.out.println("INGRESE LOS DATOS");
+                    System.out.println("Seleccione el puesto");
+                    System.out.println("1. Empleado general.");
+                    System.out.println("2. Administrador.");
+                    System.out.print("Opción: ");
+
+                    type = Integer.parseInt(scanner.nextLine());
+                    if(!(type == 1 || type == 2)) System.out.println("Opción incorrecta.");
+                } catch (NumberFormatException e){
+                    System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+                }
+            }
 
             System.out.print("Nombre: ");
             name = scanner.nextLine();
@@ -47,15 +52,21 @@ public class UserController {
             System.out.print("Apellido: ");
             lastName = scanner.nextLine();
 
-            System.out.print("DNI: ");
-            dni = scannerInteger.nextInt();
-
             System.out.print("Email: ");
             email = scanner.nextLine();
 
-            System.out.print("Teléfono: ");
-            // ToDo verificar exceptions aca
-            phone = scannerLong.nextLong();
+            while(true){
+                try{
+                    System.out.print("DNI: ");
+                    dni = Integer.parseInt(scanner.nextLine());
+
+                    System.out.print("Teléfono: ");
+                    phone = Long.parseLong(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e){
+                    System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+                }
+            }
 
             System.out.print("Usuario: ");
             user = scanner.nextLine();
@@ -75,7 +86,7 @@ public class UserController {
                 adminController.add(admin);
             }
 
-            System.out.println("Desea cargar otro usuario? S/N");
+            System.out.print("Desea cargar otro usuario? S/N: ");
             controller = scanner.nextLine().toUpperCase();
         }
     }
@@ -88,19 +99,37 @@ public class UserController {
         Scanner scanner = new Scanner(System.in);
 
         int dni;
+        int userType = 0;
 
-        System.out.println("\n*-*-*-*-*-*-*-**** Modificar Usuario ****-*-*-*-*-*-*");
-        System.out.println("Seleccione el puesto");
-        System.out.println("1. Empleado general.");
-        System.out.println("2. Administrador.");
-        System.out.print("Opción: ");
-        int userType = scanner.nextInt();
+        while(!(userType == 1 || userType == 2)){
+            try{
+                System.out.println("\n*-*-*-*-*-*-*-**** Modificar Usuario ****-*-*-*-*-*-*");
+                System.out.println("Seleccione el puesto");
+                System.out.println("1. Empleado general.");
+                System.out.println("2. Administrador.");
+                System.out.print("Opción: ");
+
+                userType = Integer.parseInt(scanner.nextLine());
+                if(!(userType == 1 || userType == 2)) System.out.println("Opción incorrecta.");
+            } catch (NumberFormatException e){
+                System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+            }
+        }
 
         switch ( userType ) {
             case 1:
                 EmployeeController employeeController = new EmployeeController();
-                System.out.print("Ingrese DNI del employee: ");
-                dni = scanner.nextInt();
+
+                while(true){
+                    try{
+                        System.out.print("DNI del Empleado: ");
+                        dni = Integer.parseInt(scanner.nextLine());
+                        break;
+                    } catch (NumberFormatException e){
+                        System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+                    }
+                }
+
                 Employee updateEmployee = employeeController.getById(dni);
 
                 if (updateEmployee != null)
@@ -109,8 +138,16 @@ public class UserController {
                 break;
             case 2:
                 AdminController adminController = new AdminController();
-                System.out.print("Ingrese DNI del admin: ");
-                dni = scanner.nextInt();
+
+                while(true){
+                    try{
+                        System.out.print("DNI del Administrador: ");
+                        dni = Integer.parseInt(scanner.nextLine());
+                        break;
+                    } catch (NumberFormatException e){
+                        System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+                    }
+                }
                 Admin updateAdmin = adminController.getById(dni);
                 if (updateAdmin != null)
                     adminController.update(updateAdmin);
@@ -140,25 +177,22 @@ public class UserController {
 
         int userType = scanner.nextInt();
 
-
         switch (userType) {
-            case 1:
+            case 1 -> {
                 EmployeeController employeeController = new EmployeeController();
                 System.out.print("Ingrese el DNI que desea eliminar: ");
                 dni = scanner.nextInt();
-                if(employeeController.getById(dni) != null)
+                if (employeeController.getById(dni) != null)
                     employeeController.delete(dni);
-                break;
-            case 2:
-
+            }
+            case 2 -> {
                 AdminController adminController = new AdminController();
                 System.out.print("Ingrese el DNI que desea eliminar: ");
                 dni = scanner.nextInt();
                 if (adminController.getById(dni) != null)
                     adminController.delete(dni);
-                break;
-            default:
-                System.out.println("Opción incorrecta.");
+            }
+            default -> System.out.println("Opción incorrecta.");
         }
     }
 
@@ -183,7 +217,6 @@ public class UserController {
 
     /**
      * Checks if a user with the provided username and password is valid.
-     *
      * @param username The username to validate.
      * @param pass     The password to validate.
      * @return The User object if a valid user is found, otherwise null.

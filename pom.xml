@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    // Serialización
+<!--    Serialización-->
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -22,6 +22,7 @@
             <version>2.8.6</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

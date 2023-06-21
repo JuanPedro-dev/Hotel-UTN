@@ -12,7 +12,7 @@ public class Booking {
 //region [Atributos]
     private String bookingId ; // id unico de 12 caracteres
     private Guest guest;
-    private Room bookedRoom;
+    private Room room;
     private BookingState bookingState;  // ir seteando de acuerdo a la fecha
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
@@ -23,14 +23,14 @@ public class Booking {
 //region [Constructores]
 
 
-    public Booking(Guest guest, Room bookedRoom, LocalDate checkInDate, LocalDate checkOutDate, BookingState bookingState) {
+    public Booking(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate, BookingState bookingState) {
         this.guest = guest;
-        this.bookedRoom = bookedRoom;
+        this.room = room;
         this.bookingState = bookingState;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.bookingId= shortUUID();
-        this.spentMoney= reservedDays(checkInDate, checkOutDate)* bookedRoom.getRoomType().getValue(); //inicia con el valor por noche de la habitacion multiplicado por la cantidad de dias que se hospeda
+        this.spentMoney= reservedDays(checkInDate, checkOutDate)* room.getRoomType().getValue(); //inicia con el valor por noche de la habitacion multiplicado por la cantidad de dias que se hospeda
     }
 
     public Booking() {
@@ -60,12 +60,12 @@ public class Booking {
         this.guest = guest;
     }
 
-    public Room getBookedRoom() {
-        return bookedRoom;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setBookedRoom(Room bookedRoom) {
-        this.bookedRoom = bookedRoom;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public LocalDate getCheckInDate() {
@@ -114,10 +114,10 @@ public class Booking {
 //region Overrides
     @Override
     public String toString() {
-        return "\t [Reserva]\n" +
+        return "\n\t [Reserva]\n" +
                 "Numero de reserva: [" + bookingId + "] \n" +
                 "Huesped autor de la reserva: " + guest +" \n"+
-                "Habitacion reservada:" + bookedRoom.toString() +"\n"+
+                "Habitación reservada:" + room.toString() +"\n"+
                 "Estado de la reserva: [" + bookingState +"] \n"+
                 "Día de check in: [" + checkInDate +"]\n"+
                 "Día de check out: [" + checkOutDate +"]\n"+

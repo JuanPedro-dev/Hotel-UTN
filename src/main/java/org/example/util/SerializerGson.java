@@ -41,17 +41,12 @@ public class SerializerGson <T>{
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             Type listType = null;
 
-
-            //Averiguar que texto pone en cada clase =>
-//            System.out.println(String.valueOf(tclass));
-
             // Lo paso a String pues el switch no toma valores Class
             switch (String.valueOf(tclass)){
                 case "class org.example.entity.Admin" -> listType = new TypeToken<ArrayList<Admin>>(){}.getType();
                 case "class org.example.entity.Booking" -> listType = new TypeToken<ArrayList<Booking>>(){}.getType();
                 case "class org.example.entity.Employee" -> listType = new TypeToken<ArrayList<Employee>>(){}.getType();
                 case "class org.example.entity.Guest" -> listType = new TypeToken<ArrayList<Guest>>(){}.getType();
-                //case "class org.example.entity.Hotel" -> listType = new TypeToken<ArrayList<Hotel>>(){}.getType();
                 case "class org.example.entity.Room" -> listType = new TypeToken<ArrayList<Room>>(){}.getType();
 
             }

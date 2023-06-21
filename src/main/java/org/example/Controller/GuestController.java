@@ -17,11 +17,8 @@ public class GuestController {
     GuestRepository guestRepository = new GuestRepository();
 
     //region [CRUD]
-
-
     /**
      * Adds a new guest to the guest repository.
-     *
      */
     public void add() {
         Scanner scanner = new Scanner(System.in);
@@ -39,6 +36,12 @@ public class GuestController {
             newGuest.setLastName(scanner.nextLine());
             System.out.print("Email: ");
             newGuest.setEmail(scanner.nextLine());
+
+            // Se agrega porque se hereda de User, pero no es posible que ingrese al sistema.
+            System.out.print("Nombre Usuario: ");
+            newGuest.setUser(scanner.nextLine());
+            System.out.print("Password: ");
+            newGuest.setPassword(scanner.nextLine());
 
             boolean hasError = true;
 
@@ -95,15 +98,13 @@ public class GuestController {
      */
     public void delete(){
         Scanner scanner = new Scanner(System.in);
-        Integer dni = null;
+        Integer dni;
 
-        boolean hasError = true;
-
-        while(hasError){
+        while(true){
             try{
                 System.out.print("Ingrese el DNI del huesped que desea eliminar: ");
                 dni = Integer.parseInt(scanner.nextLine());
-                hasError = false;
+                break;
             } catch (Exception e){
                 System.out.println("Ingrese un número valido. Error: " + e);
             }
@@ -112,13 +113,12 @@ public class GuestController {
         try{
             guestRepository.delete(dni);
         }catch (GuestExceptions e){
-            System.out.println("Error el dni no existe. " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
     /**
      * Updates the information of a guest.
-     *
      * @param updateGuest the guest object containing the updated information
      */
     public void update(Guest updateGuest){
@@ -140,37 +140,35 @@ public class GuestController {
                 option = scanner.nextLine();
 
                 switch (option) {
-                    case "1":
+                    case "1" -> {
                         System.out.print("Ingrese nuevo nombre: ");
                         updateGuest.setName(scanner.nextLine());
                         System.out.println("Modificación exitosa");
-                        break;
-                    case "2":
+                    }
+                    case "2" -> {
                         System.out.print("Ingrese nuevo apellido: ");
                         updateGuest.setLastName(scanner.nextLine());
                         System.out.println("Modificación exitosa");
-                        break;
-                    case "3":
-                        boolean hasError = true;
+                    }
+                    case "3" -> {
 
-                        while(hasError){
-                            try{
+                        while (true) {
+                            try {
                                 System.out.print("Ingrese nuevo teléfono: ");
                                 updateGuest.setPhoneNumber(Long.parseLong(scanner.nextLine()));
-                                hasError = false;
-                            } catch (NumberFormatException e){
+                                break;
+                            } catch (NumberFormatException e) {
                                 System.out.println("Ingrese un número valido. Error: " + e);
                             }
                         }
                         System.out.println("Modificación exitosa");
-                        break;
-                    case "4":
+                    }
+                    case "4" -> {
                         System.out.print("Ingrese nuevo email: ");
                         updateGuest.setEmail(scanner.nextLine());
                         System.out.println("Modificación exitosa");
-                        break;
-                    default:
-                        System.out.println("Opción incorrecta.");
+                    }
+                    default -> System.out.println("Opción incorrecta.");
                 }
             }
 
@@ -184,7 +182,6 @@ public class GuestController {
 
     /**
      * Retrieves a guest from the guest repository based on the provided DNI (Document Number Identifier).
-     *
      * @param dni The DNI of the guest to retrieve.
      * @return The guest object associated with the provided DNI, or null if not found.
      */
@@ -228,6 +225,7 @@ public class GuestController {
         String option = "";
 
         while(!option.equals("0")) {
+
             viewGuestMenu();
             option = scanner.nextLine();
 

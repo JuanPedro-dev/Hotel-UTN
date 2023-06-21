@@ -77,9 +77,16 @@ public class EmployeeController {
                         System.out.println("Modificación exitosa");
                     }
                     case "3" -> {
-                        System.out.print("Ingrese nuevo teléfono= ");
-                        updateEmployee.setPhoneNumber(Long.parseLong(scanner.nextLine()));
-                        System.out.println("Modificación exitosa");
+                        while(true){
+                            try{
+                                System.out.print("Ingrese nuevo teléfono= ");
+                                updateEmployee.setPhoneNumber(Long.parseLong(scanner.nextLine()));
+                                System.out.println("Modificación exitosa");
+                                break;
+                            } catch (NumberFormatException e){
+                                System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+                            }
+                        }
                     }
                     case "4" -> {
                         System.out.print("Ingrese nuevo email= ");
@@ -104,7 +111,11 @@ public class EmployeeController {
 
         } while (flag.equals("S"));
 
-        employeeRepository.update(updateEmployee);
+        try {
+            employeeRepository.update(updateEmployee);
+        }catch (EmployeeExceptions e){
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
 

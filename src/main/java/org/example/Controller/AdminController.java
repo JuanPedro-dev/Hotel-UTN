@@ -9,8 +9,6 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class AdminController {
-
-    private static final Scanner scanner = new Scanner(System.in);
     AdminRepository adminRepository = new AdminRepository();
 
     public AdminController() {
@@ -57,6 +55,8 @@ public class AdminController {
      * @param updateAdmin The Admin object to be updated.
      */
     public void update(Admin updateAdmin){
+        Scanner scanner = new Scanner(System.in);
+
         String flag = "";
         String option;
 
