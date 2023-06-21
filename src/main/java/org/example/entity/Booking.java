@@ -11,7 +11,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class Booking {
 //region [Atributos]
     private String bookingId ; // id unico de 12 caracteres
-    private Guest bookingPassenger;
+    private Guest guest;
     private Room bookedRoom;
     private BookingState bookingState;  // ir seteando de acuerdo a la fecha
     private LocalDate checkInDate;
@@ -23,8 +23,8 @@ public class Booking {
 //region [Constructores]
 
 
-    public Booking(Guest bookingPassenger , Room bookedRoom, LocalDate checkInDate, LocalDate checkOutDate, BookingState bookingState) {
-        this.bookingPassenger= bookingPassenger;
+    public Booking(Guest guest, Room bookedRoom, LocalDate checkInDate, LocalDate checkOutDate, BookingState bookingState) {
+        this.guest = guest;
         this.bookedRoom = bookedRoom;
         this.bookingState = bookingState;
         this.checkInDate = checkInDate;
@@ -52,12 +52,12 @@ public class Booking {
         return bookingId;
     }
 
-    public Guest getBookingPassenger() {
-        return bookingPassenger;
+    public Guest getGuest() {
+        return guest;
     }
 
-    public void setBookingPassenger(Guest bookingPassenger) {
-        this.bookingPassenger = bookingPassenger;
+    public void setGuest(Guest guest) {
+        this.guest = guest;
     }
 
     public Room getBookedRoom() {
@@ -116,7 +116,7 @@ public class Booking {
     public String toString() {
         return "\t [Reserva]\n" +
                 "Numero de reserva: [" + bookingId + "] \n" +
-                "Pasajero autor de la reserva: " + bookingPassenger +" \n"+
+                "Huesped autor de la reserva: " + guest +" \n"+
                 "Habitacion reservada:" + bookedRoom.toString() +"\n"+
                 "Estado de la reserva: [" + bookingState +"] \n"+
                 "Día de check in: [" + checkInDate +"]\n"+
