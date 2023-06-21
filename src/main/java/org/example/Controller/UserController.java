@@ -216,28 +216,25 @@ public class UserController {
         do {
             viewUsersMenu();
             String option = scanner.nextLine();
-            if (HotelController.isInteger(option)) {
-                switch (option) {
-                    case "1":
-                        listOfAllUsers().forEach(System.out::println);
-                        break;
-                    case "2":
-                        addUser(scanner);
-                        break;
-                    case "3":
-                        updateUser(scanner);
-                        break;
-                    case "4":
-                        deleteUser(scanner);
-                        break;
-                    case "0":
-                        AdminController.adminMenu(scanner);
-                        break;
-                    default:
-                        System.out.println("Incorrect Input.");
-                }
+            switch (option) {
+                case "1":
+                    listOfAllUsers().forEach(System.out::println);
+                    break;
+                case "2":
+                    addUser(scanner);
+                    break;
+                case "3":
+                    updateUser(scanner);
+                    break;
+                case "4":
+                    deleteUser(scanner);
+                    break;
+                case "0":
+                    AdminController.adminMenu(scanner);
+                    break;
+                default:
+                    System.out.println("Incorrect Input.");
             }
-            else flag = HotelController.messageError();
         } while (flag);
     }
 

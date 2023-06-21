@@ -24,7 +24,6 @@ public class BookingController {
         do {
             viewBookingMenu();
             String option = scanner.nextLine();
-            if (HotelController.isInteger(option)) {
                 switch (option) {
                     case "1":
                         // ToDo falta implementacion
@@ -43,8 +42,7 @@ public class BookingController {
                         break;
                     default:
                         System.out.println("Ingreso incorrectamente.");
-                }
-            } else flag = HotelController.messageError();
+            }
         }while(flag);
     }
     //endregion

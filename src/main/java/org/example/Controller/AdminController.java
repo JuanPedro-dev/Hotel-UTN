@@ -73,7 +73,6 @@ public class AdminController {
                 System.out.println("6. Password");
                 option = scanner.nextLine();
                 //scanner.nextLine();             //cleaned buffer
-                if (HotelController.isInteger(option)) {
                     switch (option) {
                         case "1":
                             System.out.println("Ingrese nuevo nombre");
@@ -106,7 +105,6 @@ public class AdminController {
                             System.out.println("Modificación exitosa");
                             break;
                     }
-                } //Se podria sacar el if ya que pregunto antes en el UpdateUser
             }
             System.out.println("Quiere cambiar otro atributo? S/N");
             flag = scanner.nextLine().toUpperCase();
@@ -138,47 +136,46 @@ public class AdminController {
      * Displays the admin menu options.
      */
     public static void viewAdminMenu() {
-        System.out.println("*-*-*-*-*-*-*-***UTN Hotel****-*-*-*-*-*-*");
+        System.out.println("\n*-*-*-*-*-*-*-***UTN Hotel****-*-*-*-*-*-*");
         System.out.println("*-*-*-*-*-*-*-***Admin Menu****-*-*-*-*-*");
         System.out.println("1. Habitaciones");
         System.out.println("2. Huespedes");
         System.out.println("3. Reservas");
         System.out.println("4. Usuarios");
         System.out.println("0. Salir");
-        System.out.println("Ingrese una opcion: ");
+        System.out.print("Ingrese una opcion: ");
     }
 
     public static void adminMenu(Scanner scanner) {
-        boolean flag = true;
-        do {
-            viewAdminMenu();
-            String option = scanner.nextLine();
-            if (HotelController.isInteger(option)) {
-                switch (option) {
-                    case "1":
-                        //ToDo menu de rooms
-                        RoomController.roomMenu(scanner);
-                        break;
-                    case "2":
-                        //ToDo menu de guest
-                        GuestController.guestMenu(scanner);
-                        break;
-                    case "3":
-                        //ToDo menu de booking
-                        BookingController.bookingMenu(scanner);
-                        break;
-                    case "4":
-                        UserController.UserMenu(scanner);
-                        break;
-                    case "0":
-                        HotelController.login();
-                        break;
-                    default:
-                        System.out.println("Ingreso incorrectamente.");
-                }
+
+        viewAdminMenu();
+        String option = scanner.nextLine();
+
+        while (option != "0") {
+
+            switch (option) {
+                case "1":
+                    //ToDo menu de rooms
+                    RoomController.roomMenu(scanner);
+                    break;
+                case "2":
+                    //ToDo menu de guest
+                    GuestController.guestMenu(scanner);
+                    break;
+                case "3":
+                    //ToDo menu de booking
+                    BookingController.bookingMenu(scanner);
+                    break;
+                case "4":
+                    UserController.UserMenu(scanner);
+                    break;
+                case "0":
+                    HotelController.login();
+                    break;
+                default:
+                    System.out.println("Ingreso incorrectamente.");
             }
-            else flag = HotelController.messageError();
-        } while (flag);
+        }
     }
     //endregion
 }

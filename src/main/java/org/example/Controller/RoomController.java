@@ -24,30 +24,28 @@ public class RoomController {
         do {
             viewRoomMenu();
             String option = scanner.nextLine();
-            if (HotelController.isInteger(option)) {
-                switch (option) {
-                    case "1":
-                        // ToDo falta implementacion
-                        break;
-                    case "2":
-                        // ToDo falta implementacion
-                        break;
-                    case "3":
-                        // ToDo falta implementacion
-                        break;
-                    case "4":
-                        // ToDo falta implementacion
-                        break;
-                    case "5":
-                        // ToDo falta implementacion
-                        break;
-                    case "0":
-                        EmployeeController.employeeMenu(scanner);
-                        break;
-                    default:
-                        System.out.println("Ingreso incorrectamente.");
-                }
-            } else flag = HotelController.messageError();
+            switch (option) {
+                case "1":
+                    // ToDo falta implementacion
+                    break;
+                case "2":
+                    // ToDo falta implementacion
+                    break;
+                case "3":
+                    // ToDo falta implementacion
+                    break;
+                case "4":
+                    // ToDo falta implementacion
+                    break;
+                case "5":
+                    // ToDo falta implementacion
+                    break;
+                case "0":
+                    EmployeeController.employeeMenu(scanner);
+                    break;
+                default:
+                    System.out.println("Ingreso incorrectamente.");
+            }
         }while(flag);
     }
     //endregion

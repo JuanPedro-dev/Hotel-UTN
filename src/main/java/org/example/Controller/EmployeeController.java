@@ -51,7 +51,7 @@ public class EmployeeController {
      * @param updateEmployee The Employee object to be updated.
      */
     public void update(Employee updateEmployee){
-        String flag = null;
+        String flag ;
         String option;
         do {
             if (updateEmployee != null) {
@@ -63,46 +63,44 @@ public class EmployeeController {
                 System.out.println("5. Usuario");
                 System.out.println("5. Password");
                 option = scanner.nextLine();
-                //scanner.nextLine();             //cleaned buffer
-                if (HotelController.isInteger(option)) {
-                    switch (option) {
-                        case "1":
-                            System.out.println("Ingrese nuevo nombre");
-                            updateEmployee.setName(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "2":
-                            System.out.println("Ingrese nuevo apellido");
-                            updateEmployee.setLastName(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "3":
-                            System.out.println("Ingrese nuevo teléfono");
-                            updateEmployee.setPhoneNumber(scanner.nextInt());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "4":
-                            System.out.println("Ingrese nuevo email");
-                            updateEmployee.setEmail(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "5":
-                            System.out.println("Ingrese nuevo user");
-                            updateEmployee.setUser(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "6":
-                            System.out.println("Ingrese nuevo password");
-                            updateEmployee.setPassword(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
+                switch (option) {
+                    case "1" -> {
+                        System.out.println("Ingrese nuevo nombre");
+                        updateEmployee.setName(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                    }
+                    case "2" -> {
+                        System.out.println("Ingrese nuevo apellido");
+                        updateEmployee.setLastName(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                    }
+                    case "3" -> {
+                        System.out.println("Ingrese nuevo teléfono");
+                        updateEmployee.setPhoneNumber(scanner.nextInt());
+                        System.out.println("Modificación exitosa");
+                    }
+                    case "4" -> {
+                        System.out.println("Ingrese nuevo email");
+                        updateEmployee.setEmail(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                    }
+                    case "5" -> {
+                        System.out.println("Ingrese nuevo user");
+                        updateEmployee.setUser(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                    }
+                    case "6" -> {
+                        System.out.println("Ingrese nuevo password");
+                        updateEmployee.setPassword(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
                     }
                 }
             }
-            //scanner.nextLine();             //cleaned buffer
+
             System.out.println("Quiere cambiar otro atributo? S/N");
             flag = scanner.nextLine().toUpperCase();
         } while (flag.equals("S"));
+
         employeeRepository.update(updateEmployee);
     }
 
@@ -138,27 +136,25 @@ public class EmployeeController {
         do {
             viewEmployeeMenu();
             String option = scanner.nextLine();
-            if (HotelController.isInteger(option)) {
-                switch (option) {
-                    case "1":
-                        // ToDo llamar al menu de reservas
-                        BookingController.bookingMenu(scanner);
-                        break;
-                    case "2":
-                        // ToDo llamar al menu de huespedes
-                        GuestController.guestMenu(scanner);
-                        break;
-                    case "3":
-                        // ToDo llamar al menu de habitaciones
-                        RoomController.roomMenu(scanner);
-                        break;
-                    case "0":
-                        HotelController.login();
-                        break;
-                    default:
-                        System.out.println("Ingreso incorrectamente.");
-                }
-            } else flag = HotelController.messageError();
+            switch (option) {
+                case "1":
+                    // ToDo llamar al menu de reservas
+                    BookingController.bookingMenu(scanner);
+                    break;
+                case "2":
+                    // ToDo llamar al menu de huespedes
+                    GuestController.guestMenu(scanner);
+                    break;
+                case "3":
+                    // ToDo llamar al menu de habitaciones
+                    RoomController.roomMenu(scanner);
+                    break;
+                case "0":
+                    HotelController.login();
+                    break;
+                default:
+                    System.out.println("Ingreso incorrectamente.");
+            }
         }while(flag);
     }
 }

@@ -86,7 +86,7 @@ public class GuestController {
      * @param updateGuest the guest object containing the updated information
      */
     public void update(Guest updateGuest){
-        String flag = null;
+        String flag;
         String option;
         do {
             if (updateGuest != null) {
@@ -96,33 +96,31 @@ public class GuestController {
                 System.out.println("3. Teléfono");
                 System.out.println("4. Email");
                 option = scanner.nextLine();
-                //scanner.nextLine();             //cleaned buffer
-                if (HotelController.isInteger(option)) {
-                    switch (option) {
-                        case "1":
-                            System.out.println("Ingrese nuevo nombre");
-                            updateGuest.setName(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "2":
-                            System.out.println("Ingrese nuevo apellido");
-                            updateGuest.setLastName(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "3":
-                            System.out.println("Ingrese nuevo teléfono");
-                            updateGuest.setPhoneNumber(scanner.nextInt());
-                            System.out.println("Modificación exitosa");
-                            break;
-                        case "4":
-                            System.out.println("Ingrese nuevo email");
-                            updateGuest.setEmail(scanner.nextLine());
-                            System.out.println("Modificación exitosa");
-                            break;
-                    }
+
+                switch (option) {
+                    case "1":
+                        System.out.println("Ingrese nuevo nombre");
+                        updateGuest.setName(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                        break;
+                    case "2":
+                        System.out.println("Ingrese nuevo apellido");
+                        updateGuest.setLastName(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                        break;
+                    case "3":
+                        System.out.println("Ingrese nuevo teléfono");
+                        updateGuest.setPhoneNumber(scanner.nextInt());
+                        System.out.println("Modificación exitosa");
+                        break;
+                    case "4":
+                        System.out.println("Ingrese nuevo email");
+                        updateGuest.setEmail(scanner.nextLine());
+                        System.out.println("Modificación exitosa");
+                        break;
                 }
             }
-            //scanner.nextLine();             //cleaned buffer
+
             System.out.println("Quiere cambiar otro atributo? S/N");
             flag = scanner.nextLine().toUpperCase();
         } while (flag.equals("S"));
@@ -174,7 +172,6 @@ public class GuestController {
         do {
             viewGuestMenu();
             String option = scanner.nextLine();
-            if (HotelController.isInteger(option)) {
                 switch (option) {
                     case "1":
                         //ToDo PROBADO
@@ -205,7 +202,6 @@ public class GuestController {
                     default:
                         System.out.println("Ingreso incorrectamente.");
                 }
-            } else flag = HotelController.messageError();
         }while(flag);
     }
     //endregion
