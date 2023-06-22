@@ -1,6 +1,7 @@
 package org.example.Controller;
 
 import org.example.entity.Booking;
+import org.example.entity.Guest;
 import org.example.entity.enums.BookingState;
 import org.example.repository.BookingRepository;
 
@@ -49,6 +50,12 @@ public class BookingController {
             }
         }
     }
+
+
+    public void addBooking(){
+
+    }
+
 
     public void checkIn(){
         Scanner scanner = new Scanner(System.in);
