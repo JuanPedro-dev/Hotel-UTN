@@ -1,57 +1,44 @@
 package org.example.entity;
 
+import org.example.entity.enums.BookingState;
+
 import java.nio.ByteBuffer;
 import java.time.LocalDate;
 import java.util.UUID;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-
 public class Booking {
-
-    /*[Atributos]*/
-
+//region [Atributos]
     private String bookingId ; // id unico de 12 caracteres
-    private Guest bookingPassenger;
-    private Room bookedRoom;
+    private Guest guest;
+    private Room room;
     private BookingState bookingState;  // ir seteando de acuerdo a la fecha
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private double spentMoney;
 
+//endregion
 
-    /*[Constructores]*/
+//region [Constructores]
 
-    public Booking(Guest bookingPassenger , Room bookedRoom, LocalDate checkInDate, LocalDate checkOutDate, BookingState bookingState) {
-        this.bookingPassenger= bookingPassenger;
-        this.bookedRoom = bookedRoom;
+
+    public Booking(Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate, BookingState bookingState) {
+        this.guest = guest;
+        this.room = room;
         this.bookingState = bookingState;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.bookingId= shortUUID();
-        this.spentMoney= reservedDays(checkInDate, checkOutDate)* bookedRoom.getRoomType().getValue(); //inicia con el valor por noche de la habitacion multiplicado por la cantidad de dias que se hospeda
+        this.spentMoney= reservedDays(checkInDate, checkOutDate)* room.getRoomType().getValue(); //inicia con el valor por noche de la habitacion multiplicado por la cantidad de dias que se hospeda
     }
 
     public Booking() {
     }
+//endregion
 
-    /*[Métodos]*/
+//region [Getters & Setters]
 
-    // calcular los dias entre checkin y check out
-    public static long reservedDays (LocalDate checkInDate, LocalDate checkOutDate){
-        long daysBetween= DAYS.between(checkInDate,checkOutDate);
-        return daysBetween;
-    }
-
-
-    public static String shortUUID() {
-        UUID uuid = UUID.randomUUID();
-        long l = ByteBuffer.wrap(uuid.toString().getBytes()).getLong();
-        return Long.toString(l, Character.MAX_RADIX);
-    }
-
-
-    /*[Getters & Setters]*/
 
     public BookingState getBookingState() {
         return bookingState;
@@ -65,20 +52,20 @@ public class Booking {
         return bookingId;
     }
 
-    public Guest getBookingPassenger() {
-        return bookingPassenger;
+    public Guest getGuest() {
+        return guest;
     }
 
-    public void setBookingPassenger(Guest bookingPassenger) {
-        this.bookingPassenger = bookingPassenger;
+    public void setGuest(Guest guest) {
+        this.guest = guest;
     }
 
-    public Room getBookedRoom() {
-        return bookedRoom;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setBookedRoom(Room bookedRoom) {
-        this.bookedRoom = bookedRoom;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public LocalDate getCheckInDate() {
@@ -104,17 +91,38 @@ public class Booking {
     public void setSpentMoney(double spentMoney) {
         this.spentMoney = spentMoney;
     }
+//endregion
 
+//region [Métodos]
+
+
+    // calcular los dias entre checkin y check out
+    public static long reservedDays (LocalDate checkInDate, LocalDate checkOutDate){
+        long daysBetween= DAYS.between(checkInDate,checkOutDate);
+        return daysBetween;
+    }
+
+
+    public static String shortUUID() {
+        UUID uuid = UUID.randomUUID();
+        long l = ByteBuffer.wrap(uuid.toString().getBytes()).getLong();
+        return Long.toString(l, Character.MAX_RADIX);
+    }
+
+//endregion
+
+//region Overrides
     @Override
     public String toString() {
-        return "\t [Reserva]\n" +
+        return "\n\t [Reserva]\n" +
                 "Numero de reserva: [" + bookingId + "] \n" +
-                "Pasajero autor de la reserva: " + bookingPassenger +" \n"+
-                "Habitacion reservada:" + bookedRoom.toString() +"\n"+
+                "Huesped autor de la reserva: " + guest +" \n"+
+                "Habitación reservada:" + room.toString() +"\n"+
                 "Estado de la reserva: [" + bookingState +"] \n"+
                 "Día de check in: [" + checkInDate +"]\n"+
                 "Día de check out: [" + checkOutDate +"]\n"+
                 "Dinero gastado: [" + spentMoney +"] \n" +
                 "***";
     }
+//endregion
 }

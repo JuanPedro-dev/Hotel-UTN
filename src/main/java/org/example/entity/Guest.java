@@ -2,20 +2,23 @@ package org.example.entity;
 
 public class Guest extends User {
 
-    //region Constructors
+    //region [Constructors]
     public Guest() {
     }
 
-    public Guest(String name, String lastName, int dni, String user, String password, String email, long phoneNumber) {
-        super(name, lastName, dni, user, password, email, phoneNumber);
+    public Guest(String name, String lastName, Integer dni, String email, Long phoneNumber) {
+        super(name, lastName, dni, email, phoneNumber);
     }
     //endregion
 
-    //region Overrides
+    //region [Overrides]
 
     @Override
     public String toString() {
-        return "Guest{}" + super.toString();
+        return
+                "\n***** Huesped ***** \n"+
+                "Datos:" +
+                        super.toString();
     }
 
     //endregion

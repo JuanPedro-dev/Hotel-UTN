@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Empleado",
+    "lastName": "Empleado",
+    "dni": 123456789,
+    "user": "empleado",
+    "password": "empleado",
+    "email": "Empleado@gmail.com",
+    "phoneNumber": 123456789
+  }
+]

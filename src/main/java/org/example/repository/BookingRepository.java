@@ -77,6 +77,7 @@ public class BookingRepository implements IRepository<Booking, String>{
     @Override
     public void delete(String dni) {
         this.bookings.removeIf(booking -> booking.getBookingId().equals(dni));
+        saveToFile();
     }
 
 

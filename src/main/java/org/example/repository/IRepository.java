@@ -13,12 +13,9 @@ public interface IRepository<T, U> {
      */
     void readFromFile();
     /**
-     * lee en memoria y carga en archivo (Persistir los cambios en el archivo)
+     * Lee en memoria y carga en archivo (Persistir los cambios en el archivo)
      */
     void saveToFile();
-
-
-//    CRUD : CREATE READ UPLOAD DELETE
 
     void add(T obj);
 

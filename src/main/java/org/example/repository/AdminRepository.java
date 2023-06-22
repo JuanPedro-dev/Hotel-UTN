@@ -78,7 +78,14 @@ public class AdminRepository implements IRepository<Admin, Integer>{
 
     @Override
     public void delete(Integer dni) {
-        this.admins.removeIf(admin -> admin.getDni().equals(dni));
+        if(this.admins.removeIf(admin -> admin.getDni().equals(dni))){
+            saveToFile();
+            System.out.println("Eliminado exitosamente");
+        }
+        else {
+            throw new AdminExceptions("No se pudo eliminar el empleado");
+        }
+
     }
 
 

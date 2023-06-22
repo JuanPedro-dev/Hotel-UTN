@@ -7,6 +7,7 @@ import org.example.util.SerializerGson;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RoomRepository implements IRepository<Room, Integer>{
 
@@ -50,7 +51,7 @@ public class RoomRepository implements IRepository<Room, Integer>{
     public Room getById(Integer id) {
 
         for (Room room : this.rooms) {
-            if (room.getRoomNumber() == id) return room;
+            if (room.getRoomNumber().equals(id)) return room;
         }
 
         return null;
@@ -75,8 +76,10 @@ public class RoomRepository implements IRepository<Room, Integer>{
     }
 
     @Override
-    public void delete(Integer dni) {
-        this.rooms.removeIf(room -> room.getRoomNumber() == dni);
+    public void delete(Integer id) {
+        this.rooms.removeIf(room -> Objects.equals(room.getRoomNumber(), id));
+        saveToFile();
     }
+
 
 }

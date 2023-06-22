@@ -1,0 +1,77 @@
+[
+  {
+    "isAvailable": true,
+    "roomNumber": 101,
+    "roomType": "TRIPLE"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 102,
+    "roomType": "MATRIMONIAL"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 103,
+    "roomType": "QUAD"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 104,
+    "roomType": "SINGLE"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 105,
+    "roomType": "TWIN"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 201,
+    "roomType": "TRIPLE"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 202,
+    "roomType": "MATRIMONIAL"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 203,
+    "roomType": "QUAD"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 204,
+    "roomType": "SINGLE"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 205,
+    "roomType": "TWIN"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 301,
+    "roomType": "TRIPLE"
+  },
+  {
+    "isAvailable": true,
+    "roomNumber": 302,
+    "roomType": "MATRIMONIAL"
+  },
+  {
+    "isAvailable": false,
+    "roomNumber": 303,
+    "roomType": "QUAD"
+  },
+  {
+    "isAvailable": false,
+    "roomNumber": 304,
+    "roomType": "SINGLE"
+  },
+  {
+    "isAvailable": false,
+    "roomNumber": 305,
+    "roomType": "TWIN"
+  }
+]
