@@ -4,6 +4,7 @@ import org.example.entity.Room;
 import org.example.entity.enums.RoomType;
 import org.example.repository.RoomRepository;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -88,13 +89,21 @@ public class RoomController {
      */
     public static void deleteRoom(){
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("\n*-*-*-*-*-*-*-**** UTN Motel ****-*-*-*-*-*-*");
-        System.out.println("*-*-*-*-*-*-*-**** Borrar Habitación ****-*-*-*-*-*");
-        System.out.print("Ingrese el nro de habitación: ");
-        Integer roomID = scanner.nextInt();
-
         RoomRepository roomRepository = new RoomRepository();
+
+        int roomID;
+
+        while(true) {
+            try {
+                System.out.println("\n*-*-*-*-*-*-*-**** UTN Motel ****-*-*-*-*-*-*");
+                System.out.println("*-*-*-*-*-*-*-**** Borrar Habitación ****-*-*-*-*-*");
+                System.out.print("Ingrese el nro de habitación: ");
+                roomID = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+            }
+        }
 
         Room room = roomRepository.getById(roomID);
 
@@ -110,7 +119,6 @@ public class RoomController {
 
     /**
      * Updates the information of an Room object.
-     *
      */
     public static void updateRoom(){
 
@@ -120,18 +128,21 @@ public class RoomController {
         String flag = "S";
         String option;
 
-        System.out.println("\n*-*-*-*-*-*-*-**** UTN Motel ****-*-*-*-*-*-*");
-        System.out.println("*-*-*-*-*-*-*-**** Modificar Habitación ****-*-*-*-*-*");
-        System.out.print("Ingrese el nro de habitación: ");
-        String roomId = scanner.nextLine();
+        int roomId;
 
-        Room roomToUpdate = null;
-
-        try{
-            roomToUpdate = roomRepository.getById(Integer.valueOf(roomId));
-        } catch (NumberFormatException e){
-            System.out.println("Ingrese un número valido. Error: " + e);
+        while(true) {
+            try {
+                System.out.println("\n*-*-*-*-*-*-*-**** UTN Motel ****-*-*-*-*-*-*");
+                System.out.println("*-*-*-*-*-*-*-**** Modificar Habitación ****-*-*-*-*-*");
+                System.out.print("Ingrese el nro de habitación: ");
+                roomId = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+            }
         }
+
+        Room roomToUpdate = roomRepository.getById(roomId);
 
         if( roomToUpdate  == null ) {
             System.out.println("La habitación '" + roomId + "' no existe.");
@@ -140,38 +151,35 @@ public class RoomController {
 
         while (flag.equals("S")) {
 
-            if (roomToUpdate != null) {
+            System.out.println("Seleccione atributo a cambiar");
+            System.out.println("1. Disponibilidad.");
+            System.out.println("2. Tipo de Habitación.");
+            System.out.print("Opción: ");
 
-                System.out.println("Seleccione atributo a cambiar");
-                System.out.println("1. Disponible");
-                System.out.println("2. Tipo de Habitación.");
-                System.out.print("Opción: ");
+            option = scanner.nextLine();
 
-                option = scanner.nextLine();
+            switch (option) {
+                case "1" -> {
+                    String optionDisponible = "";
+                    System.out.println("1. Disponible");
+                    System.out.println("2. Ocupado");
+                    System.out.print("Opción: ");
 
-                switch (option) {
-                    case "1" -> {
-                        String optionDisponible = "";
-                        System.out.println("1. Disponible");
-                        System.out.println("2. Ocupado");
-                        System.out.print("Opción: ");
+                    optionDisponible = scanner.nextLine();
 
-                        optionDisponible = scanner.nextLine();
-
-                        if (optionDisponible.equals("1")) roomToUpdate.setAvailable(true);
-                        if (optionDisponible.equals("2")) roomToUpdate.setAvailable(false);
-                        if (!optionDisponible.equals("1") && !optionDisponible.equals("2")){
-                            System.out.println("Opción incorrecta.");
-                            break;
-                        }
-                        System.out.println("Modificación exitosa");
+                    if (optionDisponible.equals("1")) roomToUpdate.setAvailable(true);
+                    if (optionDisponible.equals("2")) roomToUpdate.setAvailable(false);
+                    if (!optionDisponible.equals("1") && !optionDisponible.equals("2")){
+                        System.out.println("Opción incorrecta.");
+                        break;
                     }
-                    case "2" -> {
-                        roomToUpdate = changeTypeRoom( roomToUpdate );
-                        roomRepository.update(roomToUpdate);
-                    }
-                    default -> System.out.println("Opción incorrecta.");
+                    System.out.println("Modificación exitosa");
                 }
+                case "2" -> {
+                    roomToUpdate = changeTypeRoom( roomToUpdate );
+                    roomRepository.update(roomToUpdate);
+                }
+                default -> System.out.println("Opción incorrecta.");
             }
 
             System.out.print("Quiere cambiar otro atributo? S/N: ");

@@ -81,9 +81,17 @@ public class GuestController {
     public void modifyGuest() {
         Scanner scanner = new Scanner(System.in);
 
+        int dni;
 
-        System.out.print("Ingrese DNI del huesped: ");
-        Integer dni = scanner.nextInt();
+        while(true) {
+            try {
+                System.out.print("Ingrese DNI del huesped: ");
+                dni = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+            }
+        }
 
         Guest updateGuest = guestRepository.getById(dni);
 

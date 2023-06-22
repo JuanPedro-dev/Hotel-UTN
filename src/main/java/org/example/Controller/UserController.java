@@ -168,27 +168,52 @@ public class UserController {
         Scanner scanner = new Scanner(System.in);
 
         int dni;
+        int userType;
 
-        System.out.println("*-*-*-*-*-*-*-**** Borrar Usuario ****-*-*-*-*-*-*");
-        System.out.println("Seleccione el puesto");
-        System.out.println("1. Empleado general.");
-        System.out.println("2. Administrador.");
-        System.out.println("Opción: ");
-
-        int userType = scanner.nextInt();
+        while(true) {
+            try {
+                System.out.println("*-*-*-*-*-*-*-**** Borrar Usuario ****-*-*-*-*-*-*");
+                System.out.println("Seleccione el puesto");
+                System.out.println("1. Empleado general.");
+                System.out.println("2. Administrador.");
+                System.out.print("Opción: ");
+                userType = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+            }
+        }
 
         switch (userType) {
             case 1 -> {
                 EmployeeController employeeController = new EmployeeController();
-                System.out.print("Ingrese el DNI que desea eliminar: ");
-                dni = scanner.nextInt();
+
+                while(true) {
+                    try {
+                        System.out.print("Ingrese el DNI que desea eliminar: ");
+                        dni = Integer.parseInt(scanner.nextLine());
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+                    }
+                }
+
                 if (employeeController.getById(dni) != null)
                     employeeController.delete(dni);
             }
             case 2 -> {
                 AdminController adminController = new AdminController();
-                System.out.print("Ingrese el DNI que desea eliminar: ");
-                dni = scanner.nextInt();
+
+                while(true) {
+                    try {
+                        System.out.print("Ingrese el DNI que desea eliminar: ");
+                        dni = Integer.parseInt(scanner.nextLine());
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+                    }
+                }
+
                 if (adminController.getById(dni) != null)
                     adminController.delete(dni);
             }
@@ -213,7 +238,6 @@ public class UserController {
         users.addAll(employeeController.getAllEmployees());
         return users;
     }
-
 
     /**
      * Checks if a user with the provided username and password is valid.
