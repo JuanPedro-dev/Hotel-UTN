@@ -1,7 +1,6 @@
 package org.example;
 
 import org.example.Controller.HotelController;
-import org.example.Controller.UserController;
 
 public class Main {
 

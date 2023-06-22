@@ -109,7 +109,7 @@ public class RoomController {
     }
 
     /**
-     * Updates the information of an Room object.
+     * Updates the information of a Room object.
      *
      */
     public static void updateRoom(){
@@ -181,6 +181,58 @@ public class RoomController {
         roomRepository.update(roomToUpdate);
     }
 
+    public static RoomType typeOfRoom() {
+        Scanner scanner = new Scanner(System.in);
+        RoomType type = null;
+        System.out.println("Ingrese el tipo de habitación que quiere reservar: ");
+        roomTypeMenu();
+        int roomType = scanner.nextInt();
+        switch (roomType) {
+            case 1:
+                type = RoomType.SINGLE;
+                break;
+            case 2:
+                type = RoomType.TWIN;
+                break;
+            case 3:
+                type = RoomType.MATRIMONIAL;
+                break;
+            case 4:
+                type = RoomType.TRIPLE;
+                break;
+            case 5:
+                type = RoomType.QUAD;
+                break;
+            default:
+                System.out.println("Ingreso incorrectamente.");
+        }
+        return type;
+    }
+
+    public static int roomPicked(RoomType type){
+        int option;
+        boolean flag=false;
+        Scanner scanner = new Scanner(System.in);
+        RoomRepository roomRepository = new RoomRepository();
+
+        for (Room variable : roomRepository.list()) {
+            if (variable.getRoomType() == type) System.out.println(variable.toString());
+        }
+        do {
+            System.out.print("Escriba el numero de la habitación que desea reservar: ");
+            option = scanner.nextInt();
+            for (Room r : roomRepository.list()) {
+                if (option == r.getRoomNumber()){
+                    return option;
+                }
+                else flag = false;
+            }
+            if(!flag) System.out.println("Debe ingresar un numero de habitación correcto");
+        }while(!flag);
+
+        return option;
+    }
+
     public static Room changeTypeRoom(Room roomToUpdate) {
         Scanner scanner = new Scanner(System.in);
 
@@ -241,5 +293,26 @@ public class RoomController {
         }
     }
 
+    public static void roomTypeMenu(){
+        System.out.println("*-*-*-*-*-*-*-***Habitaciones****-*-*-*-*-*-*");
+        System.out.println("1. Single");
+        System.out.println("2. Twin");
+        System.out.println("3. Matrimonial");
+        System.out.println("4. Triple");
+        System.out.println("5. Quad");
+    }
+
+    public static Room getRoom(int roomNumber) {
+        RoomRepository roomRepository = new RoomRepository();
+        List<Room> rooms = roomRepository.list();
+        if (rooms != null) {
+            for (Room room : rooms) {
+                if (room.getRoomNumber() == roomNumber) {
+                    return room;
+                }
+            }
+        }
+        return null;
+    }
 
 }
