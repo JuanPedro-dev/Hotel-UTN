@@ -292,6 +292,8 @@ public class RoomController {
             option = scanner.nextInt();
             for (Room r : roomRepository.list()) {
                 if (option == r.getRoomNumber()){
+                    r.setAvailable(false);
+                    roomRepository.update(r);
                     return option;
                 }
                 else flag = false;

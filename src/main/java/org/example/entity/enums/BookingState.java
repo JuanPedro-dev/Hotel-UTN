@@ -4,6 +4,4 @@ public enum BookingState {
     PENDING,
     INITIATED,
     FINALIZED,
-    CHECKED_IN,
-    CHECKED_OUT;
 }

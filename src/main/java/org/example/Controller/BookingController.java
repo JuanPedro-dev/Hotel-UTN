@@ -14,45 +14,7 @@ import java.util.Scanner;
 public class BookingController {
     private final BookingRepository bookingRepository = new BookingRepository();
 
-    /**
-     * Displays the booking menu options.
-     */
-    public static void viewBookingMenu(){
-        System.out.println("\n*-*-*-*-*-*-*-**** UTN Motel ****-*-*-*-*-*-*");
-        System.out.println("*-*-*-*-*-*-*-**** Menu Reserva ****-*-*-*-*-*");
-        System.out.println("1. Check in");
-        System.out.println("2. Check out");
-        System.out.println("3. Ver todas las reservas");
-//        System.out.println("4. Servicio al cuarto");
-        System.out.println("0. Salir");
-        System.out.print("Opción: ");
-    }
-    /**
-     * Booking menu options.
-     */
-    public static void bookingMenu(){
-        Scanner scanner = new Scanner(System.in);
-
-        BookingController bookingController = new BookingController();
-
-        String option = "";
-
-        while(!option.equals("0")) {
-
-            viewBookingMenu();
-            option = scanner.nextLine();
-
-            switch (option) {
-                case "1" -> bookingController.checkIn();
-                case "2" -> bookingController.checkOut();
-                case "3" -> bookingController.listAll();
-//                case "4" -> bookingController.serviceRoom();
-                case "0" -> option = "0";
-                default -> System.out.println("Opción incorrecta.");
-            }
-        }
-    }
-
+    //region [CRUD]
     /**
      *Performs the check-in process for a guest.
      *
@@ -64,7 +26,6 @@ public class BookingController {
      * Otherwise, a cancellation message is shown.
      */
     public void checkIn(){
-        //ToDo PROBAR
         GuestController guestController = new GuestController();
         Scanner scanner = new Scanner(System.in);
         int duration, roomNumber;
@@ -114,6 +75,25 @@ public class BookingController {
         }
     }
 
+
+    /**
+     * Performs the check-out process for a booking.
+     *
+     * This method prompts the user to enter the booking ID for check-out. It retrieves the corresponding booking from the
+     * booking repository and checks various conditions before proceeding with the check-out process.
+     *
+     * If the booking with the specified ID is not found, the method displays an error message and exits.
+     *
+     * If the booking is not in the INITIATED state, indicating that it has already been checked out or has not been checked
+     * in yet, the method displays an appropriate message and exits.
+     *
+     * The method compares the current date with the check-out date of the booking. If the current date is before the
+     * check-out date, indicating an early check-out attempt, the method displays an error message and exits.
+     *
+     * If all conditions are met, the booking state is updated to FINALIZED, indicating successful check-out. The booking
+     * repository is updated with the modified booking. The method displays a success message along with the total cost of
+     * the booking.
+     */
     public void checkOut(){
         Scanner scanner = new Scanner(System.in);
 
@@ -131,7 +111,7 @@ public class BookingController {
             return;
         }
 
-        if (booking.getBookingState() != BookingState.CHECKED_IN) {
+        if (booking.getBookingState() != BookingState.INITIATED) {
             System.out.println("La reserva no ha sido check-in o ya ha sido check-out.");
             return;
         }
@@ -143,12 +123,23 @@ public class BookingController {
             return;
         }
 
-        booking.setBookingState(BookingState.CHECKED_OUT);
+        booking.setBookingState(BookingState.FINALIZED);
         bookingRepository.update(booking);
 
         System.out.println("Check-out realizado con éxito.");
+        System.out.println("Su costo total es: " + booking.getSpentMoney());
 
     }
+
+
+    /**
+     * Retrieves and displays a list of all bookings.
+     *
+     * This method retrieves all bookings from the booking repository and displays them on the console.
+     *
+     * If there are no bookings in the system, the method displays an appropriate message and exits.
+     * The list of bookings is displayed as a formatted string representation of the bookings.
+     */
     public void listAll(){
         List<Booking> bookings = bookingRepository.list();
 
@@ -162,6 +153,22 @@ public class BookingController {
 
         System.out.println(bookings);
     }
+
+
+    /**
+     * Requests room service for a specific booking.
+     *
+     * This method allows the user to request room service for a specific booking by providing the booking ID.
+     *
+     * The method prompts the user to enter the booking ID and retrieves the corresponding booking from the booking repository.
+     *
+     * If the booking is not found, an appropriate message is displayed and the method exits.
+     *
+     * After retrieving the booking, the method prompts the user to enter the service order.
+     * Currently, the method does not implement the logic to process the service order.
+     *
+     * Once the service request is processed, a success message is displayed.
+     */
     public void serviceRoom(){
 
         System.out.println("Solicitando servicio al cuarto...");
@@ -184,7 +191,13 @@ public class BookingController {
 
         System.out.println("Servicio al cuarto solicitado con éxito.");
     }
+    //endregion
 
+    //region [Utilities]
+    /**
+     * Creates a LocalDate object based on user input.
+     * @return The LocalDate object representing the user-entered date.
+     */
     public static LocalDate createLocalDate(){
         Scanner scanner = new Scanner(System.in);
         int year, month, dayOfMonth;
@@ -222,5 +235,47 @@ public class BookingController {
         }
         return localDate;
     }
+    //endregion
 
+    //region [Menu]
+    /**
+     * Displays the booking menu options.
+     */
+    public static void viewBookingMenu(){
+        System.out.println("\n*-*-*-*-*-*-*-**** UTN Motel ****-*-*-*-*-*-*");
+        System.out.println("*-*-*-*-*-*-*-**** Menu Reserva ****-*-*-*-*-*");
+        System.out.println("1. Check in");
+        System.out.println("2. Check out");
+        System.out.println("3. Ver todas las reservas");
+//        System.out.println("4. Servicio al cuarto");
+        System.out.println("0. Salir");
+        System.out.print("Opción: ");
+    }
+
+    /**
+     * Booking menu options.
+     */
+    public static void bookingMenu(){
+        Scanner scanner = new Scanner(System.in);
+
+        BookingController bookingController = new BookingController();
+
+        String option = "";
+
+        while(!option.equals("0")) {
+
+            viewBookingMenu();
+            option = scanner.nextLine();
+
+            switch (option) {
+                case "1" -> bookingController.checkIn();
+                case "2" -> bookingController.checkOut();
+                case "3" -> bookingController.listAll();
+//                case "4" -> bookingController.serviceRoom();
+                case "0" -> option = "0";
+                default -> System.out.println("Opción incorrecta.");
+            }
+        }
+    }
+    //endregion
 }
