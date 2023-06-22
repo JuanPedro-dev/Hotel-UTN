@@ -159,7 +159,7 @@ public class AdminController {
             switch (option) {
                 case "1" -> RoomController.roomMenu(scanner);
                 case "2" -> GuestController.guestMenu();
-                case "3" -> BookingController.bookingMenu(scanner);
+                case "3" -> BookingController.bookingMenu();
                 case "4" -> UserController.userMenu();
                 case "0" -> option = "0";
                 default ->System.out.println("Opción incorrecta.");

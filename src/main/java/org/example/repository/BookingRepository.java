@@ -1,11 +1,17 @@
 package org.example.repository;
 
 import org.example.entity.Booking;
+import org.example.entity.Guest;
+import org.example.entity.Room;
+import org.example.entity.enums.BookingState;
+import org.example.entity.enums.RoomType;
 import org.example.exceptions.BookingExceptions;
 import org.example.util.SerializerGson;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BookingRepository implements IRepository<Booking, String>{
@@ -19,8 +25,29 @@ public class BookingRepository implements IRepository<Booking, String>{
 
     @Override
     public void readFromFile() {
-        bookings = (List<Booking>) gson.deserializer(file.getPath(), Booking.class);
+        // ToDo descomentar al reparar serialización con LocalDate
+//        bookings = (List<Booking>) gson.deserializer(file.getPath(), Booking.class);
         if(bookings == null) bookings = new ArrayList<>();
+
+        //region [Borrar al reparar LocalDate]
+        bookings = new ArrayList<>(Arrays.asList(
+                new Booking(
+                        new Guest("Cosme", "Fulanito", 123456789, "CosmeFulanito@gmail.com",123456789L),
+                        new Room(false,304, RoomType.SINGLE),
+                        LocalDate.now().minusDays(2),
+                        LocalDate.now(),
+                        BookingState.INITIATED
+
+                ),
+                new Booking(
+                        new Guest("Juan Bautista Junior", "Shabadú", 123456789, "JuanBautistaJuniorShabadú@gmail.com",123456789L),
+                        new Room(false,303,RoomType.QUAD),
+                        LocalDate.now().minusDays(2),
+                        LocalDate.now(),
+                        BookingState.PENDING
+                )
+        ));
+        //endregion
     }
 
     @Override
@@ -34,7 +61,8 @@ public class BookingRepository implements IRepository<Booking, String>{
 
         if ( toAdd == null ) {
             this.bookings.add(obj);
-            saveToFile();
+            // Descomentar al reparar LocalDate
+//            saveToFile();
         } else{
             throw new BookingExceptions("El libro ya existe!");
         }
@@ -70,14 +98,15 @@ public class BookingRepository implements IRepository<Booking, String>{
                 }
             }
         }
-
-        saveToFile();
+        // Descomentar al reparar LocalDate
+//        saveToFile();
     }
 
     @Override
     public void delete(String dni) {
         this.bookings.removeIf(booking -> booking.getBookingId().equals(dni));
-        saveToFile();
+        // Descomentar al reparar LocalDate
+//        saveToFile();
     }
 
 

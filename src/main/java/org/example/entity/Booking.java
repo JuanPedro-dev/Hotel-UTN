@@ -95,7 +95,6 @@ public class Booking {
 
 //region [Métodos]
 
-
     // calcular los dias entre checkin y check out
     public static long reservedDays (LocalDate checkInDate, LocalDate checkOutDate){
         long daysBetween= DAYS.between(checkInDate,checkOutDate);
@@ -114,15 +113,18 @@ public class Booking {
 //region Overrides
     @Override
     public String toString() {
-        return "\n\t [Reserva]\n" +
-                "Numero de reserva: [" + bookingId + "] \n" +
-                "Huesped autor de la reserva: " + guest +" \n"+
-                "Habitación reservada:" + room.toString() +"\n"+
-                "Estado de la reserva: [" + bookingState +"] \n"+
-                "Día de check in: [" + checkInDate +"]\n"+
-                "Día de check out: [" + checkOutDate +"]\n"+
-                "Dinero gastado: [" + spentMoney +"] \n" +
-                "***";
+        return
+                "\n***** Reserva ***** "+
+                "\nDatos: " +
+
+                "\n\tCódigo de la reserva= " + bookingId +
+                "\n\tHuesped= " + guest.getLastName() + " " + guest.getName() +
+                "\n\tHabitación reservada= " + room.getRoomNumber() +
+                "\n\tEstado de la reserva= " + bookingState +
+                "\n\tDía de ingreso= " + checkInDate +
+                "\n\tDía de egreso= " + checkOutDate +
+                "\tDinero gastado= " + spentMoney +
+                "\n*****\n";
     }
 //endregion
 }

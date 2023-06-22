@@ -10,7 +10,10 @@ public class Employee extends User{
 
     @Override
     public String toString() {
-        return "Employee" + super.toString();
+        return
+                "\n***** Empleado ***** \n"+
+                        "Datos:" +
+                        super.toString();
     }
 
 }

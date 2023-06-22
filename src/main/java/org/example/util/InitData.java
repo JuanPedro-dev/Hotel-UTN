@@ -13,13 +13,15 @@ import java.util.List;
 /**
  * Si queremos que ya tenga datos ejecutar previamente esta clase
  */
-public class InitData {public static void main(String[] args) {
-    initRoom();
-    initUser();
-    initEmployee();
-    initGuest();
-    initBooking();
-}
+public class InitData {
+
+    public static void main(String[] args) {
+        initRoom();
+        initUser();
+        initEmployee();
+        initGuest();
+        initBooking();
+    }
 
     public static void initRoom(){
         SerializerGson serializerGson = new SerializerGson<>();
@@ -87,22 +89,31 @@ public class InitData {public static void main(String[] args) {
         serializerGson.serializer(guests, guestFile.getPath());
     }
 
+    // ToDo reparar la serializacion con LocalDate...
     public static void initBooking(){
-    // ToDo 
-//        SerializerGson serializerGson = new SerializerGson<>();
-//
-//        File bookingFile = new File("src/main/java/org/example/file/BookingFile.json");
-//
-//        List<Booking> bookings = new ArrayList<>(Arrays.asList(
-//                new Booking(
-//                        new Guest("Huesped", "Huesped", 123456789, "Huesped@gmail.com",123456789L),
-//                        new Room(true,101, RoomType.TRIPLE),
-//                        LocalDate.now(),
-//                        LocalDate.now(),
-//                        BookingState.FINALIZED
-//                )
-//        ));
-//
+
+        SerializerGson serializerGson = new SerializerGson<>();
+
+        File bookingFile = new File("src/main/java/org/example/file/BookingFile.json");
+
+        List<Booking> bookings = new ArrayList<>(Arrays.asList(
+                new Booking(
+                        new Guest("Cosme", "Fulanito", 123456789, "CosmeFulanito@gmail.com",123456789L),
+                        new Room(false,304, RoomType.SINGLE),
+                        LocalDate.now().minusDays(2),
+                        LocalDate.now(),
+                        BookingState.INITIATED
+
+                ),
+                new Booking(
+                        new Guest("Juan Bautista Junior", "Shabadú", 123456789, "JuanBautistaJuniorShabadú@gmail.com",123456789L),
+                        new Room(false,303,RoomType.QUAD),
+                        LocalDate.now().minusDays(2),
+                        LocalDate.now(),
+                        BookingState.PENDING
+                )
+        ));
+
 //        serializerGson.serializer(bookings, bookingFile.getPath());
     }
 

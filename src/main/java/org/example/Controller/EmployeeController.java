@@ -155,7 +155,7 @@ public class EmployeeController {
             option = scanner.nextLine();
 
             switch (option) {
-                case "1" -> BookingController.bookingMenu(scanner);
+                case "1" -> BookingController.bookingMenu();
                 case "2" -> GuestController.guestMenu();
                 case "3" -> RoomController.roomMenu(scanner);
                 case "0" -> option = "0";
