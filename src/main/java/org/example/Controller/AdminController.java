@@ -2,6 +2,7 @@ package org.example.Controller;
 
 import org.example.entity.Admin;
 import org.example.exceptions.AdminExceptions;
+import org.example.exceptions.EmployeeExceptions;
 import org.example.repository.AdminRepository;
 
 import java.util.List;
@@ -22,7 +23,6 @@ public class AdminController {
         adminRepository.list().forEach(System.out::println);
     }
 
-
     /**
      * Retrieves a list of all admins from the admin repository.
      *
@@ -32,7 +32,6 @@ public class AdminController {
         return adminRepository.list();
     }
 
-
     /**
      * Adds a new admin to the admin repository.
      * @param newAdmin The admin object to be added.
@@ -40,7 +39,6 @@ public class AdminController {
     public void add(Admin newAdmin) {
         adminRepository.add(newAdmin);
     }
-
 
     /**
      * Deletes an admin from the admin repository based on the provided DNI (Document Number Identifier).
@@ -63,13 +61,14 @@ public class AdminController {
         while (flag.equals("S")) {
 
             if (updateAdmin != null) {
-                System.out.println("Seleccione atributo a cambiar");
+                System.out.println("\nSeleccione atributo a cambiar");
                 System.out.println("1. Nombre");
                 System.out.println("2. Apellido");
                 System.out.println("3. Teléfono");
                 System.out.println("4. Email");
                 System.out.println("5. Usuario");
                 System.out.println("6. Password");
+                System.out.print("Opción: ");
                 option = scanner.nextLine();
 
                 switch (option) {
@@ -85,7 +84,17 @@ public class AdminController {
                     }
                     case "3" -> {
                         System.out.println("Ingrese nuevo teléfono");
-                        updateAdmin.setPhoneNumber(Long.parseLong(scanner.nextLine()));
+
+                        while(true){
+                            try{
+                                System.out.print("Ingrese nuevo teléfono= ");
+                                updateAdmin.setPhoneNumber(Long.parseLong(scanner.nextLine()));
+                                System.out.println("Modificación exitosa");
+                                break;
+                            } catch (NumberFormatException e){
+                                System.out.println("Ingrese un número valido. Error: " + e.getMessage());
+                            }
+                        }
                         System.out.println("Modificación exitosa");
                     }
                     case "4" -> {
@@ -110,7 +119,11 @@ public class AdminController {
             flag = scanner.nextLine().toUpperCase();
 
         }
-        adminRepository.update(updateAdmin);
+        try {
+            adminRepository.update(updateAdmin);
+        }catch (EmployeeExceptions e){
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
 
@@ -157,7 +170,7 @@ public class AdminController {
             option = scanner.nextLine();
 
             switch (option) {
-                case "1" -> RoomController.roomMenu(scanner);
+                case "1" -> RoomController.roomMenu();
                 case "2" -> GuestController.guestMenu();
                 case "3" -> BookingController.bookingMenu();
                 case "4" -> UserController.userMenu();

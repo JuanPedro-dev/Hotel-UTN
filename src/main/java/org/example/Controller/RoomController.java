@@ -228,7 +228,9 @@ public class RoomController {
         return roomToUpdate;
     }
 
-    public static void roomMenu(Scanner scanner) {
+    public static void roomMenu() {
+
+        Scanner scanner = new Scanner( System.in );
 
         String option = "";
 

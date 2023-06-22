@@ -14,7 +14,11 @@ public class Guest extends User {
         return
                 "\n***** Huesped ***** \n"+
                 "Datos:" +
-                        super.toString();
+                    "\n\tNombre= " + super.getName() +
+                    "\n\tApellido= " + super.getLastName() +
+                    "\n\tDNI= " + super.getDni() +
+                    "\n\temail= " + super.getEmail() +
+                    "\n\tTeléfono= " + super.getPhoneNumber();
     }
 
 }
